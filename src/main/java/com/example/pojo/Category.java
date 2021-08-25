@@ -1,5 +1,11 @@
 package com.example.pojo;
 
+import java.io.Serializable;
+
+/**
+ * category
+ * @author 
+ */
 public class Category {
     private Integer id;
 
@@ -20,7 +26,7 @@ public class Category {
     }
 
     public void setCategoryName(String categoryName) {
-        this.categoryName = categoryName == null ? null : categoryName.trim();
+        this.categoryName = categoryName;
     }
 
     public Integer getPid() {
@@ -31,12 +37,21 @@ public class Category {
         this.pid = pid;
     }
 
+    public Category(Integer id, String categoryName, Integer pid) {
+        this.id = id;
+        this.categoryName = categoryName;
+        this.pid = pid;
+    }
+
+    public Category() {
+    }
+
     @Override
     public String toString() {
-        return "{" +
-                "id:" + id +
-                ", categoryName:'" + categoryName + '\'' +
-                ", pid:" + pid +
+        return "Category{" +
+                "id=" + id +
+                ", categoryName='" + categoryName + '\'' +
+                ", pid=" + pid +
                 '}';
     }
 }
