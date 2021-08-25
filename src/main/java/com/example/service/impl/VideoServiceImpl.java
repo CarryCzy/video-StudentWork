@@ -16,8 +16,8 @@ public class VideoServiceImpl implements VideoService {
     @Resource
     private VideoMapper videoMapper;
 
-    @Resource
-    private VideoDetailMapper videoDetailMapper;
+//    @Resource
+//    private VideoDetailMapper videoDetailMapper;
 
     @Resource
     private CategoryMapper categoryMapper;
@@ -123,12 +123,14 @@ public class VideoServiceImpl implements VideoService {
     }
 
     public List<VideoDetail> getDetailById(int id){
-        return videoDetailMapper.getByVideoId(id);
+//        return videoDetailMapper.getByVideoId(id);
+        return null;
     }
 
     @Override
     public VideoDetail getDetailByDetailId(int id) {
-        return videoDetailMapper.getById(id);
+//        return videoDetailMapper.getById(id);
+        return null;
     }
 
     @Override
@@ -158,12 +160,14 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public int insVideoDetail(int id, String title, int episode) {
-        return videoDetailMapper.insVideoDetail(id,title,episode);
+//        return videoDetailMapper.insVideoDetail(id,title,episode);
+        return 0;
     }
 
     @Override
     public int updDetailById(VideoDetail detail) {
-        return videoDetailMapper.updByDetail(detail);
+//        return videoDetailMapper.updByDetail(detail);
+        return 0;
     }
 
     @Override
@@ -173,11 +177,12 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public void delDetail(Integer id) {
-        videoDetailMapper.del(id);
+//        videoDetailMapper.del(id);
     }
 
     @Override
     public int delDetailByDetailId(Integer id) {
-        return videoDetailMapper.delByDetailId(id);
+//        return videoDetailMapper.delByDetailId(id);
+        return 0;
     }
 }

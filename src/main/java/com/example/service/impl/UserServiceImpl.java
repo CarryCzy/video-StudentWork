@@ -3,14 +3,23 @@ package com.example.service.impl;
 import com.example.mapper.UserMapper;
 import com.example.pojo.User;
 import com.example.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
+/**
+ * 用户service接口实现类
+ * @author yxy
+ */
+@Service
 public class UserServiceImpl implements UserService {
-    @Autowired
-    UserMapper userMapper;
+
+    @Resource
+    private UserMapper userMapper;
+
     @Override
-    public int deleteByPrimaryKey(Integer id) {
-        return userMapper.deleteByPrimaryKey(id);
+    public User login(User user) {
+        return userMapper.login(user);
     }
 
     @Override
@@ -20,12 +29,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int insertSelective(User user) {
-        return insertSelective(user);
-    }
-
-    @Override
-    public User selectByPrimaryKey(Integer id) {
-        return userMapper.selectByPrimaryKey(id);
+        return userMapper.insertSelective(user);
     }
 
     @Override
@@ -34,7 +38,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public int updateByPrimaryKey(User user) {
-        return userMapper.updateByPrimaryKey(user);
+    public User selectByUsername(String username) {
+        return userMapper.selectByUsername(username);
     }
 }

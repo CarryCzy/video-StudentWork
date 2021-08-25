@@ -14,24 +14,27 @@
   <sql id="Base_Column_List">
     id, username, phone, `password`, img, age, birthday, sex
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
+
+  <!-- 验证登录 -->
+  <select id="login" parameterType="com.example.pojo.User" resultMap="BaseResultMap">
+    select
     <include refid="Base_Column_List" />
     from user
-    where id = #{id,jdbcType=INTEGER}
+    where username = #{username,jdbcType=VARCHAR}
+    and password = #{password,jdbcType=VARCHAR}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+
+  <!-- 注册 -->
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.pojo.User" useGeneratedKeys="true">
-    insert into user (username, phone, `password`, 
+    insert into user (username, phone, `password`,
       img, age, birthday, sex
       )
-    values (#{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
+    values (#{username,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
       #{img,jdbcType=VARCHAR}, #{age,jdbcType=INTEGER}, #{birthday,jdbcType=DATE}, #{sex,jdbcType=VARCHAR}
       )
   </insert>
+
+  <!-- 可选项注册 -->
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.pojo.User" useGeneratedKeys="true">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -81,6 +84,8 @@
       </if>
     </trim>
   </insert>
+
+  <!-- 可选项更新user -->
   <update id="updateByPrimaryKeySelective" parameterType="com.example.pojo.User">
     update user
     <set>
@@ -108,15 +113,13 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.pojo.User">
-    update user
-    set username = #{username,jdbcType=VARCHAR},
-      phone = #{phone,jdbcType=VARCHAR},
-      `password` = #{password,jdbcType=VARCHAR},
-      img = #{img,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER},
-      birthday = #{birthday,jdbcType=DATE},
-      sex = #{sex,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+  <!-- 检查用户名是否存在 -->
+  <select id="selectByUsername" parameterType="com.example.pojo.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where username = #{username,jdbcType=VARCHAR}
+  </select>
+
 </mapper>
