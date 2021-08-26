@@ -3,6 +3,32 @@
   <component name="PersistentConfig">
     <option name="historyConfigList">
       <map>
+        <entry key="actor">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="ActorMapper" />
+              <option name="daoPackage" value="com.example.mapper" />
+              <option name="daoPostfix" value="Mapper" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="Actor" />
+              <option name="modelPackage" value="com.example.pojo" />
+              <option name="name" value="actor" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="id" />
+              <option name="projectFolder" value="$PROJECT_DIR$" />
+              <option name="tableName" value="actor" />
+              <option name="useActualColumnNames" value="true" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="useTableNameAlias" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="mapper" />
+            </Config>
+          </value>
+        </entry>
         <entry key="admins">
           <value>
             <Config>
@@ -94,6 +120,32 @@
               <option name="projectFolder" value="$PROJECT_DIR$" />
               <option name="tableName" value="user_collection" />
               <option name="useSchemaPrefix" value="true" />
+              <option name="xmlMvnPath" value="src/main/resources" />
+              <option name="xmlPackage" value="mapper" />
+            </Config>
+          </value>
+        </entry>
+        <entry key="video_category">
+          <value>
+            <Config>
+              <option name="comment" value="true" />
+              <option name="daoMvnPath" value="src/main/java" />
+              <option name="daoName" value="VideoCategoryMaapper" />
+              <option name="daoPackage" value="com.example.mapper" />
+              <option name="daoPostfix" value="Maapper" />
+              <option name="modelMvnPath" value="src/main/java" />
+              <option name="modelName" value="VideoCategory" />
+              <option name="modelPackage" value="com.example.pojo" />
+              <option name="name" value="video_category" />
+              <option name="overrideJava" value="true" />
+              <option name="overrideXML" value="true" />
+              <option name="primaryKey" value="" />
+              <option name="projectFolder" value="$PROJECT_DIR$" />
+              <option name="tableName" value="video_category" />
+              <option name="useActualColumnNames" value="true" />
+              <option name="useLombokPlugin" value="true" />
+              <option name="useSchemaPrefix" value="true" />
+              <option name="useTableNameAlias" value="true" />
               <option name="xmlMvnPath" value="src/main/resources" />
               <option name="xmlPackage" value="mapper" />
             </Config>

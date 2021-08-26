@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.ActorMapper">
+  <resultMap id="BaseResultMap" type="com.example.pojo.Actor">
+    <id column="actor_id" jdbcType="INTEGER" property="id" />
+    <result column="actor_img_src" jdbcType="VARCHAR" property="img_src" />
+    <result column="actor_name" jdbcType="VARCHAR" property="name" />
+    <result column="actor_fans" jdbcType="INTEGER" property="fans" />
+    <result column="actor_trend" jdbcType="INTEGER" property="trend" />
+    <result column="actor_video_number" jdbcType="INTEGER" property="video_number" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    actor.id as actor_id, actor.img_src as actor_img_src, actor.`name` as `actor_name`, 
+    actor.fans as actor_fans, actor.trend as actor_trend, actor.video_number as actor_video_number
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from actor actor
+    where actor.id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from actor
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+<!--  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.pojo.Actor" useGeneratedKeys="true">-->
+<!--    insert into actor (img_src, `name`, fans, -->
+<!--      trend, video_number)-->
+<!--    values (#{img_src,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{fans,jdbcType=INTEGER}, -->
+<!--      #{trend,jdbcType=INTEGER}, #{video_number,jdbcType=INTEGER})-->
+<!--  </insert>-->
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.pojo.Actor" useGeneratedKeys="true">
+    insert into actor
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="img_src != null">
+        img_src,
+      </if>
+      <if test="name != null">
+        `name`,
+      </if>
+      <if test="fans != null">
+        fans,
+      </if>
+      <if test="trend != null">
+        trend,
+      </if>
+      <if test="video_number != null">
+        video_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="img_src != null">
+        #{img_src,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fans != null">
+        #{fans,jdbcType=INTEGER},
+      </if>
+      <if test="trend != null">
+        #{trend,jdbcType=INTEGER},
+      </if>
+      <if test="video_number != null">
+        #{video_number,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.pojo.Actor">
+    update actor
+    <set>
+      <if test="img_src != null">
+        img_src = #{img_src,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null">
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="fans != null">
+        fans = #{fans,jdbcType=INTEGER},
+      </if>
+      <if test="trend != null">
+        trend = #{trend,jdbcType=INTEGER},
+      </if>
+      <if test="video_number != null">
+        video_number = #{video_number,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+<!--  <update id="updateByPrimaryKey" parameterType="com.example.pojo.Actor">-->
+<!--    update actor-->
+<!--    set img_src = #{img_src,jdbcType=VARCHAR},-->
+<!--      `name` = #{name,jdbcType=VARCHAR},-->
+<!--      fans = #{fans,jdbcType=INTEGER},-->
+<!--      trend = #{trend,jdbcType=INTEGER},-->
+<!--      video_number = #{video_number,jdbcType=INTEGER}-->
+<!--    where id = #{id,jdbcType=INTEGER}-->
+<!--  </update>-->
+  <select id="queryActor" parameterType="com.example.pojo.Actor" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from actor
+    <where>
+      <if test="id!=null || id != 0">
+        id like concat('%',#{id},'%')
+      </if>
+      <if test="name!=null || name != ''">
+        `name` like concat('%',#{name},'%')
+      </if>
+    </where>
+  </select>
+</mapper>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.VideoCategoryMapper">
+  <resultMap id="BaseResultMap" type="com.example.pojo.VideoCategory">
+    <result column="video_category_video_id" jdbcType="INTEGER" property="video_id" />
+    <result column="video_category_category_id" jdbcType="INTEGER" property="category_id" />
+  </resultMap>
+  <insert id="insert" parameterType="com.example.pojo.VideoCategory">
+    insert into video_category (video_id, category_id)
+    values (#{video_id,jdbcType=INTEGER}, #{category_id,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.pojo.VideoCategory">
+    insert into video_category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="video_id != null">
+        video_id,
+      </if>
+      <if test="category_id != null">
+        category_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="video_id != null">
+        #{video_id,jdbcType=INTEGER},
+      </if>
+      <if test="category_id != null">
+        #{category_id,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+</mapper>
