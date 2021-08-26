@@ -4,10 +4,18 @@ import com.example.mapper.AdminsMapper;
 import com.example.pojo.Admins;
 import com.example.service.AdminsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class AdminsServiceImpl implements AdminsService {
     @Autowired
     AdminsMapper adminsMapper;
+
+    @Override
+    public Admins login(Admins admins) {
+        return adminsMapper.login(admins);
+    }
+
     @Override
     public int deleteByPrimaryKey(Integer id) {
         return adminsMapper.deleteByPrimaryKey(id);

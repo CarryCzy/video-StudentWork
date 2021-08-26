@@ -2,6 +2,7 @@ package com.example.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.pojo.*;
+import com.example.service.AdminsService;
 import com.example.service.VideoService;
 import com.example.utils.CodeImageUtil;
 import org.apache.commons.io.FileUtils;
@@ -28,6 +29,10 @@ public class ManagerController {
 
     @Resource
     private VideoService videoServiceImpl;
+    @Resource
+    private AdminsService adminsService;
+    //存储返回给页面的对象数据
+    private Map<String, Object> result = new HashMap<>();
 
 
     @RequestMapping("getCode")
@@ -42,14 +47,51 @@ public class ManagerController {
     }
 
 
+    @RequestMapping("login")
+    @ResponseBody
+    public Map<String, Object> login(Admins admin, @RequestParam("code") String code,HttpServletRequest request) throws IOException {
+        // 校验验证码信息
+        String vcode = (String) request.getSession().getAttribute("adminLoginCode");
+        if ("".equals(vcode)) {
+            result.put("success", false);
+            result.put("loginMsg", "长时间为操作,会话已失效,请刷新页面后重试!");
+            result.put("loginCode", 0);
+            return result;
+        } else if (!code.equalsIgnoreCase(vcode)) {
+            result.put("success", false);
+            result.put("loginMsg", "验证码错误!");
+            result.put("loginCode", 0);
+            return result;
+        }
+        request.getSession().removeAttribute("adminLoginCode");
+        //校验用户登录信息
+        try {
+            Admins admins = adminsService.login(admin);//验证账户和密码是否存在
+            if (admins != null) {
+                HttpSession session = request.getSession(); //将用户信息存储到Session
+                session.setAttribute("admin", admins);
+                result.put("success", true);
+                result.put("loginCode", 1);
+                return result;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.put("success", false);
+            result.put("loginMsg", "登录失败! 服务器端发生异常!");
+            result.put("loginCode", 0);
+            return result;
+        }
+        //登录失败
+        result.put("success", false);
+        result.put("loginMsg", "用户名或密码错误!");
+        result.put("loginCode", 0);
+        return result;
+    }
 
     @RequestMapping("toIndex")
     public String toIndex(){
         return "redirect:/jsp/manager/index.jsp";
     }
-
-
-
 
 
     @RequestMapping("user/list")
