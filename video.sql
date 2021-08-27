@@ -312,3 +312,24 @@ INSERT INTO `video_detail` VALUES ('19', '第一级', '1', '123-01.MP4', '2020-1
 INSERT INTO `video_detail` VALUES ('20', '出发', '1', '青凌团建-01.MP4', '2020-10-22 09:55:54', '38');
 INSERT INTO `video_detail` VALUES ('21', '合照', '2', '青凌团建-02.MP4', '2020-10-22 09:56:22', '38');
 INSERT INTO `video_detail` VALUES ('22', '比赛', '3', '青凌团建-03.MP4', '2020-10-22 09:56:51', '38');
+
+
+-- ----------------------------
+-- Table structure for `carousel`  轮播图管理
+-- ----------------------------
+DROP TABLE IF EXISTS `carousel`;
+CREATE TABLE `carousel` (
+                            `id` int(10) NOT NULL AUTO_INCREMENT,
+                            `title` varchar(20) DEFAULT NULL,
+                            `imgSrc` varchar(255) DEFAULT NULL,
+                            PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+-- ----------------------------
+-- Records of carousel
+-- ----------------------------
+INSERT INTO `carousel` VALUES ('1', '功夫', 'file/video/images/轮播图/功夫.jpg');
+INSERT INTO `carousel` VALUES ('2', '狄仁杰2四大天王', 'file/video/images/轮播图/狄仁杰2四大天王.jpg');
+INSERT INTO `carousel` VALUES ('3', '过春天', 'file/video/images/轮播图/过春天.jpg');
+INSERT INTO `carousel` VALUES ('4', '慎重勇者', 'file/video/images/轮播图/慎重勇者.jpg');
+INSERT INTO `carousel` VALUES ('5', '超人高中生们', 'file/video/images/轮播图/超人高中生们.jpg');
+INSERT INTO `carousel` VALUES ('6', '好小子', 'file/video/images/轮播图/好小子.jpg');

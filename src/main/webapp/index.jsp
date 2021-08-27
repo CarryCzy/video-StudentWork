@@ -14,6 +14,7 @@
     <script src="static/plugins/layui/layui.js"></script>
     <script src="static/plugins/jquery/jquery.js"></script>
     <script src="static/js/movie.js"></script>
+    <script src="static/js/carousel.js"></script>
 </head>
 <body class="indexBody">
     <%--头部--%>
@@ -22,33 +23,34 @@
     <%--轮播图--%>
     <div style="width: 100%;">
         <div class="layui-carousel lunbotuDiv" id="test1" lay-filter="test1">
-            <div carousel-item>
-                <div>
-                    <a href="javascript:">
-                        <img src="file/video/images/轮播图/功夫.jpg" width="100%" height="400px" alt="功夫">
-                    </a>
+             <div carousel-item class="carouselDiv">
+                <%-- 轮播图改为动态获取 --%>
+    <%--                <div>--%>
+    <%--                    <a href="javascript:">--%>
+    <%--                        <img src="file/video/images/轮播图/功夫.jpg" width="100%" height="400px" alt="功夫">--%>
+    <%--                    </a>--%>
+    <%--                </div>--%>
+    <%--                <div>--%>
+    <%--                    <a href="javascript:">--%>
+    <%--                        <img src="file/video/images/轮播图/狄仁杰2四大天王.jpg" alt="狄仁杰2四大天王" width="100%" height="400px">--%>
+    <%--                    </a>--%>
+    <%--                </div>--%>
+    <%--                <div>--%>
+    <%--                    <a href="javascript:">--%>
+    <%--                        <img src="file/video/images/轮播图/过春天.jpg" alt="过春天" width="100%" height="400px">--%>
+    <%--                    </a>--%>
+    <%--                </div>--%>
+    <%--                <div>--%>
+    <%--                    <a href="javascript:">--%>
+    <%--                        <img src="file/video/images/轮播图/慎重勇者.jpg" alt="慎重勇者" width="100%" height="400px">--%>
+    <%--                    </a>--%>
+    <%--                </div>--%>
+    <%--                <div>--%>
+    <%--                    <a href="javascript:">--%>
+    <%--                        <img src="file/video/images/轮播图/超人高中生们.jpg" alt="超人高中生们" width="100%" height="400px">--%>
+    <%--                    </a>--%>
+    <%--                </div>--%>
                 </div>
-                <div>
-                    <a href="javascript:">
-                        <img src="file/video/images/轮播图/狄仁杰2四大天王.jpg" alt="狄仁杰2四大天王" width="100%" height="400px">
-                    </a>
-                </div>
-                <div>
-                    <a href="javascript:">
-                        <img src="file/video/images/轮播图/过春天.jpg" alt="过春天" width="100%" height="400px">
-                    </a>
-                </div>
-                <div>
-                    <a href="javascript:">
-                        <img src="file/video/images/轮播图/慎重勇者.jpg" alt="慎重勇者" width="100%" height="400px">
-                    </a>
-                </div>
-                <div>
-                    <a href="javascript:">
-                        <img src="file/video/images/轮播图/超人高中生们.jpg" alt="超人高中生们" width="100%" height="400px">
-                    </a>
-                </div>
-            </div>
             <a name="skip"></a>
         </div>
 
@@ -144,10 +146,12 @@
     }
 
     /**
-     *页面加载时展示所有视频信息
-     */
+    *页面加载时展示所有视频信息
+    *展示轮播图
+    */
     $(function () {
         showVideo("video/getAll",pageNum,pageSize);
+        showCarousel("carousel/getAll");
     });
 /*---------------------------初始化、声明变量和方法 end---------------------------------------------------------*/
 

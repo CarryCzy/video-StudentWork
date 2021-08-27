@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.mapper.CarouselMapper">
+  <resultMap id="BaseResultMap" type="com.example.pojo.Carousel">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="imgSrc" jdbcType="VARCHAR" property="imgSrc" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, title, imgSrc
+  </sql>
+
+  <select id="getAll" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from carousel
+  </select>
+
+</mapper>

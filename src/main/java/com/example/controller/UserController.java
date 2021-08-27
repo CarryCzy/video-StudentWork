@@ -1,14 +1,12 @@
 package com.example.controller;
 
 import com.example.pojo.User;
+import com.example.service.HistoryService;
 import com.example.service.UserService;
 import com.example.utils.CodeImageUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.imageio.ImageIO;
@@ -17,8 +15,6 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.HashMap;
-import java.util.Map;
 
 @Controller
 @RequestMapping("user")
@@ -26,6 +22,9 @@ public class UserController {
 
     @Resource
     private UserService userService;
+
+    @Resource
+    private HistoryService historyService;
 
     /**
      * 获取验证码
@@ -91,19 +90,19 @@ public class UserController {
      */
     @RequestMapping("/register")
     public String register(User user){
-        int i = userService.insertSelective(user);
-        return "redirect:index.jsp";
+        userService.insertSelective(user);
+        return "redirect:/index.jsp";
     }
 
     /**
      * 跳转个人中心
-     * @param id
+     * @param uid
      * @param model
-     * @return sessionUser conllection history
+     * @return sessionUser collection histories
      */
     @RequestMapping("/home")
-    public String toUserHome(@RequestParam("id") Integer id, Model model){
-
+    public String toUserHome(@RequestParam("id") Integer uid, Model model){
+        model.addAttribute("histories", historyService.selectByUid(uid));
         return "user/home";
     }
 
@@ -113,8 +112,11 @@ public class UserController {
      * @return
      */
     @RequestMapping("/update")
-    public String update(User user){
+    public String update(User user, HttpSession session){
         userService.updateByPrimaryKeySelective(user);
+        session.setAttribute("user", user);
         return "user/home";
     }
+
+
 }

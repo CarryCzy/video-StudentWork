@@ -1,9 +1,9 @@
 package com.example.pojo;
 
 import java.util.Date;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+
+import lombok.*;
+import org.springframework.format.annotation.DateTimeFormat;
 
 /**
  * user 用户实体层
@@ -12,6 +12,7 @@ import lombok.Setter;
 @Data
 @Getter
 @Setter
+@RequiredArgsConstructor
 public class User {
     private Integer id;
 
@@ -25,6 +26,7 @@ public class User {
 
     private Integer age;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date birthday;
 
     private String sex;
