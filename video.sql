@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : seiryo
+Source Server         : MySql
 Source Server Version : 50556
 Source Host           : localhost:3306
 Source Database       : video
@@ -10,10 +10,30 @@ Target Server Type    : MYSQL
 Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2020-10-22 11:26:06
+Date: 2021-08-27 17:18:55
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `actor`
+-- ----------------------------
+DROP TABLE IF EXISTS `actor`;
+CREATE TABLE `actor` (
+  `id` int(11) NOT NULL,
+  `img_src` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `fans` int(11) DEFAULT NULL,
+  `trend` int(11) DEFAULT NULL,
+  `video_number` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of actor
+-- ----------------------------
+INSERT INTO `actor` VALUES ('1', null, '测试', '199990', '199999', '4');
+INSERT INTO `actor` VALUES ('2', null, '123', '2222', '22222', '1');
 
 -- ----------------------------
 -- Table structure for `admins`
@@ -31,6 +51,33 @@ CREATE TABLE `admins` (
 -- Records of admins
 -- ----------------------------
 INSERT INTO `admins` VALUES ('1', 'admin', '123', 'static/images/管理员头像.png');
+
+-- ----------------------------
+-- Table structure for `area`
+-- ----------------------------
+DROP TABLE IF EXISTS `area`;
+CREATE TABLE `area` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of area
+-- ----------------------------
+INSERT INTO `area` VALUES ('1', '内地');
+INSERT INTO `area` VALUES ('2', '香港');
+INSERT INTO `area` VALUES ('3', '台湾');
+INSERT INTO `area` VALUES ('4', '日本');
+INSERT INTO `area` VALUES ('5', '韩国');
+INSERT INTO `area` VALUES ('6', '欧美地区');
+INSERT INTO `area` VALUES ('7', '澳门');
+INSERT INTO `area` VALUES ('8', '美国');
+INSERT INTO `area` VALUES ('9', '法国');
+INSERT INTO `area` VALUES ('10', '东南亚地区');
+INSERT INTO `area` VALUES ('11', '印度');
+INSERT INTO `area` VALUES ('12', '泰国');
+INSERT INTO `area` VALUES ('13', '英国');
 
 -- ----------------------------
 -- Table structure for `category`
@@ -193,6 +240,25 @@ INSERT INTO `videos` VALUES ('28', '测试', '123', '123', 'file/video/images/�
 INSERT INTO `videos` VALUES ('34', 'ces', '1', '1', 'file/video/images/ces.jpg', '测试', '1', '1', '内地', '2019', '0');
 INSERT INTO `videos` VALUES ('35', 'ce', '1', '1', 'file/video/images/hezhao.jpg', '测试', '1', '1', '内地', '2019', '0');
 INSERT INTO `videos` VALUES ('38', '青凌团建', '4', '5', 'file/video/images/合照.jpg', '刘力 朱娟 毛玲', '团建游玩', '3', '日本', '2017', '0');
+
+-- ----------------------------
+-- Table structure for `video_area`
+-- ----------------------------
+DROP TABLE IF EXISTS `video_area`;
+CREATE TABLE `video_area` (
+  `video_id` int(11) DEFAULT NULL,
+  `area_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of video_area
+-- ----------------------------
+INSERT INTO `video_area` VALUES ('26', '1');
+INSERT INTO `video_area` VALUES ('27', '1');
+INSERT INTO `video_area` VALUES ('28', '8');
+INSERT INTO `video_area` VALUES ('34', '1');
+INSERT INTO `video_area` VALUES ('35', '1');
+INSERT INTO `video_area` VALUES ('38', '4');
 
 -- ----------------------------
 -- Table structure for `video_category`

@@ -6,6 +6,8 @@ import com.example.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
@@ -13,11 +15,6 @@ public class CategoryServiceImpl implements CategoryService {
     @Override
     public int delCategory(Integer id) {
         return categoryMapper.delCategory(id);
-    }
-
-    @Override
-    public int insert(Category category) {
-        return categoryMapper.insert(category);
     }
 
     @Override
@@ -36,12 +33,17 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public int updateByPrimaryKey(Category category) {
-        return categoryMapper.updateByPrimaryKey(category);
+    public void insCategory(int vid, Integer integer) {
+        categoryMapper.insCategory(vid,integer);
     }
 
     @Override
-    public void insCategory(int vid, Integer integer) {
-        categoryMapper.insCategory(vid,integer);
+    public List<Category> selByPid(Integer pid) {
+        return categoryMapper.selByPid(pid);
+    }
+
+    @Override
+    public String getNameById(Integer id) {
+        return categoryMapper.getNameById(id);
     }
 }

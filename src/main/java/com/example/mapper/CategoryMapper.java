@@ -2,11 +2,11 @@ package com.example.mapper;
 
 import com.example.pojo.Category;
 
+import java.util.List;
+
 public interface CategoryMapper {
 
     int delCategory(Integer id);
-
-    int insert(Category category);
 
     int insertSelective(Category category);
 
@@ -14,7 +14,9 @@ public interface CategoryMapper {
 
     int updateByPrimaryKeySelective(Category category);
 
-    int updateByPrimaryKey(Category category);
-
     void insCategory(int vid, Integer integer);
+
+    public List<Category> selByPid(Integer pid);
+
+    public String getNameById(Integer id);
 }

@@ -19,10 +19,10 @@
     delete from category
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.pojo.Category" useGeneratedKeys="true">
+ <!-- <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.pojo.Category" useGeneratedKeys="true">
     insert into category (category_name, pid)
     values (#{categoryName,jdbcType=VARCHAR}, #{pid,jdbcType=INTEGER})
-  </insert>
+  </insert>-->
   <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.pojo.Category" useGeneratedKeys="true">
     insert into category
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -43,7 +43,23 @@
     </trim>
   </insert>
   <insert id="insCategory">
-
+    insert into category
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="categoryName != null">
+        category_name,
+      </if>
+      <if test="pid != null">
+        pid,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="categoryName != null">
+        #{categoryName,jdbcType=VARCHAR},
+      </if>
+      <if test="pid != null">
+        #{pid,jdbcType=INTEGER},
+      </if>
+    </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.pojo.Category">
     update category
@@ -57,10 +73,20 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.example.pojo.Category">
+  <!--<update id="updateByPrimaryKey" parameterType="com.example.pojo.Category">
     update category
     set category_name = #{categoryName,jdbcType=VARCHAR},
       pid = #{pid,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
-  </update>
+  </update>-->
+  <select id="selByPid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List"></include>
+    from category
+    where pid = #{pid}
+  </select>
+  <select id="getNameById" parameterType="java.lang.Integer" resultType="java.lang.String">
+    select category_name
+    from category
+    where id = #{id}
+  </select>
 </mapper>

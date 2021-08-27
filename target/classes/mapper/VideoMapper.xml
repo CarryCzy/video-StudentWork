@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.mapper.VideoMapper">
 
-  <resultMap id="VideoResultMap" type="Video">
+  <resultMap id="VideoResultMap" type="com.example.pojo.Video">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="current_episode" jdbcType="INTEGER" property="currentEpisode" />
@@ -16,12 +16,12 @@
     <result column="publish_date" jdbcType="DATE" property="publishDate" />
     <result column="finished" jdbcType="BIT" property="finished"/>
 
-    <collection property="categoryList" ofType="Category" column="id"
+    <collection property="categoryList" ofType="com.example.pojo.Category" column="id"
       select="selectCategoryByVideoId">
     </collection>
   </resultMap>
 
-  <resultMap id="VideoAndTypeResultMap" type="Video">
+  <resultMap id="VideoAndTypeResultMap" type="com.example.pojo.Video">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="NAME" jdbcType="VARCHAR" property="name" />
     <result column="current_episode" jdbcType="INTEGER" property="currentEpisode" />
@@ -39,7 +39,7 @@
       select="com.example.mapper.CategoryMapper.getNameById">
     </association>
 
-    <collection property="categoryList" ofType="Category" column="id"
+    <collection property="categoryList" ofType="com.example.pojo.Category" column="id"
       select="selectCategoryByVideoId">
     </collection>
   </resultMap>
@@ -223,7 +223,7 @@
     select * from videos where id = #{id}
   </select>
 
-  <select id="selectCategoryByVideoId" resultType="Category">
+  <select id="selectCategoryByVideoId" resultType="com.example.pojo.Category">
     select c.* from video_category vc,category c
     where c.id = vc.category_id
     and vc.video_id = #{id}

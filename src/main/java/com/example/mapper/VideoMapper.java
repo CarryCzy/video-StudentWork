@@ -1,5 +1,6 @@
 package com.example.mapper;
 
+import com.example.pojo.Category;
 import com.example.pojo.Video;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
@@ -18,7 +19,7 @@ public interface VideoMapper {
 
 
     Video selectById(int id);
-//    List<Category> selectCategoryByVideoId(int id);
+    List<Category> selectCategoryByVideoId(int id);
 
     List<Video> selectAllByCondition(int type, int category, String location, Integer year,int start,int pageSize,Integer pre,Integer last);
     int selectCountByCondition(int type, int category, String location, Integer year,Integer pre,Integer last);
@@ -31,7 +32,7 @@ public interface VideoMapper {
     int selectCountByName(String name);
 
     Video findVideoWithCatrgory(int id);
-//    List<Category> findCategoryWithVideo(int id);
+    List<Category> findCategoryWithVideo(int id);
 
     List<Video> findVideoAndCategory();
 

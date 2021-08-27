@@ -3,6 +3,7 @@ package com.example.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.example.pojo.*;
 import com.example.service.AdminsService;
+import com.example.service.CategoryService;
 import com.example.service.VideoService;
 import com.example.utils.CodeImageUtil;
 import org.apache.commons.io.FileUtils;
@@ -31,6 +32,8 @@ public class ManagerController {
     private VideoService videoServiceImpl;
     @Resource
     private AdminsService adminsService;
+    @Resource
+    private CategoryService categoryServiceImpl;
     //存储返回给页面的对象数据
     private Map<String, Object> result = new HashMap<>();
 
@@ -104,9 +107,9 @@ public class ManagerController {
     @RequestMapping("video/list")
     public String video(HttpServletRequest request){
         List<Video> videos = videoServiceImpl.getAllVideos();
-//        List<Category> type = categoryServiceImpl.selByPid(0);
+        List<Category> type = categoryServiceImpl.selByPid(0);
         request.setAttribute("videos",videos);
-//        request.setAttribute("type",type);
+        request.setAttribute("type",type);
             return "manager/videolist";
     }
 
@@ -115,9 +118,9 @@ public class ManagerController {
     public String search(HttpServletRequest request,Video video,String year){
         System.out.println(video);
         List<Video> videos = videoServiceImpl.getAllVideosByCondition(video,year);
-//        List<Category> types = categoryServiceImpl.selByPid(0);
+        List<Category> types = categoryServiceImpl.selByPid(0);
         request.setAttribute("videos",videos);
-//        request.setAttribute("type",types);
+        request.setAttribute("type",types);
         request.setAttribute("video",video);
         request.setAttribute("year",year);
         return "manager/videolist";
@@ -240,9 +243,9 @@ public class ManagerController {
             videoServiceImpl.updVideo(id,name,totalEpisode,currentEpisode,null,type2,category,starring,year,location,statue,description);
         }
         List<Video> videos = videoServiceImpl.getAllVideos();
-//        List<Category> type = categoryServiceImpl.selByPid(0);
+        List<Category> type = categoryServiceImpl.selByPid(0);
         request.setAttribute("videos",videos);
-//        request.setAttribute("type",type);
+        request.setAttribute("type",type);
         return "manager/videolist";
     }
 
