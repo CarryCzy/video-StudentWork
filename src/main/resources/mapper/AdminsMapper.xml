@@ -23,7 +23,7 @@
     from admins
     where name = #{name} and password = #{password}
   </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from admins
     where id = #{id,jdbcType=INTEGER}
   </delete>

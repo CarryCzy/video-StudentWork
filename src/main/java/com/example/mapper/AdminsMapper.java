@@ -2,6 +2,8 @@ package com.example.mapper;
 
 import com.example.pojo.Admins;
 
+import java.util.List;
+
 public interface AdminsMapper {
     /**
      *管理员后台登录
@@ -9,13 +11,15 @@ public interface AdminsMapper {
      * @return
      */
     Admins login(Admins admins);
+
+    Admins selectByPrimaryKey(Integer id);
+
     int deleteByPrimaryKey(Integer id);
 
     int insert(Admins admins);
 
     int insertSelective(Admins admins);
 
-    Admins selectByPrimaryKey(Integer id);
 
     int updateByPrimaryKeySelective(Admins admins);
 

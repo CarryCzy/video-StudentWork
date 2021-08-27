@@ -121,5 +121,58 @@
     from user
     where username = #{username,jdbcType=VARCHAR}
   </select>
+  <!-- 用户管理功能-qym-分页查询所有用户数据 -->
+    <select id="getAll" parameterType="integer" resultType="com.example.pojo.User">
+      select * from user limit #{param1},#{param2}
+    </select>
+  <!-- 获取用户总数-->
+  <select id="getCount" resultType="java.lang.Integer">
+    select count(*) from user
+  </select>
 
+  <!-- 根据id查询某一用户信息-->
+  <select id="selectById" parameterType="com.example.pojo.User" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id}
+  </select>
+  <!-- 根据条件查询用户 -->
+  <select id="getByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    <where>
+      <if test="param1.username != null and param1.username != ''">
+        username like concat('%',#{param1.username},'%')
+      </if>
+      <if test="param1.phone != null and param1.phone != ''">
+        and phone like concat('%',#{param1.phone},'%')
+      </if>
+      <if test="param1.sex != null and param1.sex != ''">
+        and
+        sex like concat('%',#{param1.sex},'%')
+      </if>
+    </where>
+    limit #{param2},#{param3}
+  </select>
+  <!--根据条件获取用户总数-->
+  <select id="getCountByCondition" parameterType="com.example.pojo.User" resultType="java.lang.Integer">
+    select count(*) from user
+    <where>
+      <if test="username!=null || username != ''">
+        username like concat('%',#{username},'%')
+      </if>
+      <if test="phone!=null || phone != ''">
+        and phone like concat('%',#{phone},'%')
+      </if>
+      <if test="sex!=null || sex != ''">
+        and sex like concat('%',#{sex},'%')
+      </if>
+    </where>
+  </select>
+  <!-- 根据id删除用户 -->
+  <delete id="deleteById" parameterType="com.example.pojo.User">
+        delete from user where id = #{id}
+  </delete>
 </mapper>
