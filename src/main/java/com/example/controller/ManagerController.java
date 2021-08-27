@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.example.pojo.*;
 import com.example.service.AdminsService;
 import com.example.service.CategoryService;
+import com.example.service.UserService;
 import com.example.service.VideoService;
 import com.example.utils.CodeImageUtil;
 import org.apache.commons.io.FileUtils;
@@ -34,6 +35,8 @@ public class ManagerController {
     private AdminsService adminsService;
     @Resource
     private CategoryService categoryServiceImpl;
+    @Resource
+    private UserService userServiceImpl;
     //存储返回给页面的对象数据
     private Map<String, Object> result = new HashMap<>();
 
@@ -49,7 +52,14 @@ public class ManagerController {
         session.setAttribute("adminLoginCode",code);
     }
 
-
+    /**
+     * 管理员后台登录
+     * @param admin
+     * @param code
+     * @param request
+     * @return
+     * @throws IOException
+     */
     @RequestMapping("login")
     @ResponseBody
     public Map<String, Object> login(Admins admin, @RequestParam("code") String code,HttpServletRequest request) throws IOException {
@@ -91,19 +101,86 @@ public class ManagerController {
         return result;
     }
 
+    /**
+     * 登录成功跳转至后台首页
+     * @return
+     */
     @RequestMapping("toIndex")
     public String toIndex(){
         return "redirect:/jsp/manager/index.jsp";
     }
 
-
+    /**
+     * 跳转至用户管理功能页面
+     * @return
+     */
     @RequestMapping("user/list")
     public String user(){
         return "manager/userlist";
     }
 
+    /**
+     * 得到用户分页数据，返回数据给页面json
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping("getAll")
+    @ResponseBody
+    public Map<String, Object> getAll(Integer page,Integer limit){
+        int start = (page-1)*limit;
+        List<User> list = userServiceImpl.getAll(start,limit);
+        int count = userServiceImpl.getCount();
+        if (list.size() > 0){
+            result.put("code",0);
+            result.put("data",list);
+            result.put("count",count);
+        }else {
+            result.put("code",1);
+        }
+        return result;
+    }
 
+    /**
+     * 查看用户功能
+     * @param id
+     * @param request
+     * @return
+     */
+    @RequestMapping("user/detail/{id}")
+    public String userDetail(@PathVariable("id")Integer id,HttpServletRequest request){
+        User user = userServiceImpl.selectById(id);
+        System.out.println(user);
+        request.setAttribute("user",user);
+        return "manager/user_detail";
+    }
 
+    /**
+     * 删除用户功能
+     * @param id
+     * @return
+     */
+    @RequestMapping("user/delete/{id}")
+    @ResponseBody
+    public Integer delUser(@PathVariable("id")Integer id){
+        return userServiceImpl.deleteById(id);
+    }
+
+    @RequestMapping("getByCondition")
+    @ResponseBody
+    public Map<String, Object> getByCondition(User user,Integer page,Integer limit){
+        Integer start = (page-1)*limit;
+        List<User> list = userServiceImpl.getByCondition(user,start,limit);
+        Integer count = userServiceImpl.getCountByCondition(user);
+        if (list.size() > 0){
+            result.put("code",0);
+            result.put("data",list);
+            result.put("count",count);
+        }else {
+            result.put("code",1);
+        }
+        return result;
+    }
     @RequestMapping("video/list")
     public String video(HttpServletRequest request){
         List<Video> videos = videoServiceImpl.getAllVideos();
@@ -255,7 +332,6 @@ public class ManagerController {
     public String detail(HttpServletRequest request,@PathVariable("id")int id){
         Video videoWithCategory = videoServiceImpl.getVideoWithCategory(id);
         List<VideoDetail> detailById = videoServiceImpl.getDetailById(id);
-
         request.setAttribute("video",videoWithCategory);
         request.setAttribute("episodes",detailById);
         return "manager/video_detail";
