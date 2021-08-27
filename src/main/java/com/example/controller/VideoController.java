@@ -62,9 +62,21 @@ public class VideoController {
         return pageInfo;
     }
 
+    /**
+     * 根据视频名称分页信息搜索视频 c
+     * @param name
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @RequestMapping("/getByName/{name}/{pageNum}/{pageSize}")
     @ResponseBody
-    public PageInfo<Video> getByName(@PathVariable("name") String name,@PathVariable("pageNum") int pageNum,@PathVariable("pageSize") int pageSize){
+    public PageInfo<Video> getByName(@PathVariable("name") String name,@PathVariable("pageNum") int pageNum,@PathVariable("pageSize") int pageSize) {
+        try {
+            name = new String(name.getBytes("iso-8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            name=name;
+        }
         if (pageNum <= 0){
             pageNum = 1;
         }
@@ -78,12 +90,22 @@ public class VideoController {
         pageInfo.setList(videoServiceImpl.getByName(name,pageInfo));
         return pageInfo;
     }
+
+    /**
+     * 根据视频名称搜索视频 c
+     * @param name
+     * @return
+     */
     @RequestMapping("/getByName/{name}")
     @ResponseBody
     public List<Video> getByName(@PathVariable("name") String name){
+        try {
+            name = new String(name.getBytes("iso-8859-1"),"utf-8");
+        } catch (UnsupportedEncodingException e) {
+            name=name;
+        }
         return videoServiceImpl.getByName(name);
     }
-
     @RequestMapping("detail/{id}")
     public String detail(@PathVariable("id")int id, HttpServletRequest request){
         Video video = videoServiceImpl.getById(id);

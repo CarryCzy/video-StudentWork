@@ -24,12 +24,19 @@ public interface VideoMapper {
     List<Video> selectAllByCondition(int type, int category, String location, Integer year,int start,int pageSize,Integer pre,Integer last);
     int selectCountByCondition(int type, int category, String location, Integer year,Integer pre,Integer last);
 
-    @Select("select * from videos where name like concat('%',#{param1},'%')")
-    List<Video> selectByName(String name);
-    @Select("select * from videos where name like concat('%',#{param1},'%') limit #{param2},#{param3}")
-    List<Video> selectByNameAndPage(String name,int start,int pageSize);
-    @Select("select count(*) from videos where name like concat('%',#{param1},'%')")
-    int selectCountByName(String name);
+//    @Select("select * from videos where name like concat('%',#{param1},'%')")
+//    List<Video> selectByName(String name);
+//    @Select("select * from videos where name like concat('%',#{param1},'%') limit #{param2},#{param3}")
+//    List<Video> selectByNameAndPage(String name,int start,int pageSize);
+//    @Select("select count(*) from videos where name like concat('%',#{param1},'%')")
+//    int selectCountByName(String name);
+
+    /*根据视频名称查询视频 c*/
+    List<Video> getByName(String name);
+    /*根据视频名称和分页信息搜索视频 c*/
+    List<Video> getByNameAndPage(String name,int start,int pageSize);
+    /*根据视频名称查询视频数 c*/
+    int getCountByName(String name);
 
     Video findVideoWithCatrgory(int id);
     List<Category> findCategoryWithVideo(int id);

@@ -150,6 +150,18 @@
       where id = #{param11}
     </update>
 
+  <select id="getCountByName" resultType="java.lang.Integer">
+    select count(*) from videos where name like concat('%',#{name},'%')
+  </select>
+
+  <select id="getByName" resultMap="VideoResultMap">
+    select * from videos where name like concat('%',#{name},'%')
+  </select>
+
+  <select id="getByNameAndPage" resultMap="VideoResultMap">
+    select * from videos where name like concat('%',#{param1},'%') limit #{param2},#{param3}
+  </select>
+  
     <select id="selectAllByCondition" resultType="com.example.pojo.Video">
     select * from videos v
     left join video_category vc on v.id = vc.video_id

@@ -40,7 +40,7 @@ public class VideoServiceImpl implements VideoService {
     public List<Video> getByName(String name,PageInfo pageInfo) {
         int start = (pageInfo.getPageNum()-1) * pageInfo.getPageSize();
         System.out.println(start);
-        return videoMapper.selectByNameAndPage(name,start,pageInfo.getPageSize());
+        return videoMapper.getByNameAndPage(name,start,pageInfo.getPageSize());
     }
 
     @Override
@@ -67,12 +67,12 @@ public class VideoServiceImpl implements VideoService {
 
     @Override
     public List<Video> getByName(String name) {
-        return videoMapper.selectByName(name);
+        return videoMapper.getByName(name);
     }
 
     @Override
     public int getCountByName(String name) {
-        return videoMapper.selectCountByName(name);
+        return videoMapper.getCountByName(name);
     }
 
     @Override
