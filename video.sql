@@ -322,14 +322,15 @@ CREATE TABLE `carousel` (
                             `id` int(10) NOT NULL AUTO_INCREMENT,
                             `title` varchar(20) DEFAULT NULL,
                             `imgSrc` varchar(255) DEFAULT NULL,
+                            `status` int(10) DEFAULT 0,
                             PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 -- ----------------------------
 -- Records of carousel
 -- ----------------------------
-INSERT INTO `carousel` VALUES ('1', '功夫', 'file/video/images/轮播图/功夫.jpg');
-INSERT INTO `carousel` VALUES ('2', '狄仁杰2四大天王', 'file/video/images/轮播图/狄仁杰2四大天王.jpg');
-INSERT INTO `carousel` VALUES ('3', '过春天', 'file/video/images/轮播图/过春天.jpg');
-INSERT INTO `carousel` VALUES ('4', '慎重勇者', 'file/video/images/轮播图/慎重勇者.jpg');
-INSERT INTO `carousel` VALUES ('5', '超人高中生们', 'file/video/images/轮播图/超人高中生们.jpg');
-INSERT INTO `carousel` VALUES ('6', '好小子', 'file/video/images/轮播图/好小子.jpg');
+INSERT INTO `carousel` VALUES ('1', '功夫', 'file/video/images/轮播图/功夫.jpg', '1');
+INSERT INTO `carousel` VALUES ('2', '狄仁杰2四大天王', 'file/video/images/轮播图/狄仁杰2四大天王.jpg', '1');
+INSERT INTO `carousel` VALUES ('3', '过春天', 'file/video/images/轮播图/过春天.jpg', '1');
+INSERT INTO `carousel` VALUES ('4', '慎重勇者', 'file/video/images/轮播图/慎重勇者.jpg', '1');
+INSERT INTO `carousel` VALUES ('5', '超人高中生们', 'file/video/images/轮播图/超人高中生们.jpg', '1');
+INSERT INTO `carousel` VALUES ('6', '好小子', 'file/video/images/轮播图/好小子.jpg', '1');

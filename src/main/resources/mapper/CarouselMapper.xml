@@ -5,15 +5,17 @@
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="title" jdbcType="VARCHAR" property="title" />
     <result column="imgSrc" jdbcType="VARCHAR" property="imgSrc" />
+    <result column="status" jdbcType="INTEGER" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, imgSrc
+    id, title, imgSrc, status
   </sql>
 
-  <select id="getAll" resultMap="BaseResultMap">
+  <select id="getAllByStatus" parameterType="com.example.pojo.Carousel" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from carousel
+    where status = #{status,jdbcType=INTEGER}
   </select>
 
 </mapper>

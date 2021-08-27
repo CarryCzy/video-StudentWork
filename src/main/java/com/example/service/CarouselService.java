@@ -8,6 +8,6 @@ import java.util.List;
  * 轮播图service接口
  */
 public interface CarouselService {
-    //查询全部
-    List<Carousel> getAll();
+    //通过状态查询全部
+    List<Carousel> getAllByStatus(Integer status);
 }

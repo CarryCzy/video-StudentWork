@@ -15,6 +15,7 @@
     <script src="static/plugins/jquery/jquery.js"></script>
     <script src="static/js/movie.js"></script>
     <script src="static/js/carousel.js"></script>
+    <script src="static/js/selectItems.js"></script>
 </head>
 <body class="indexBody">
     <%--头部--%>
@@ -59,11 +60,11 @@
             <ul class="selectList" id="select1">
                 <span>频道：</span>
                 <li style="background: #4EBBF9"><a href="javascript:void (0);" style="color: #fff;" typeId="0">全部</a></li>
-                <li><a href="javascript:void (0);" typeId="1">电影</a></li>
-                <li><a href="javascript:void (0);" typeId="2">动漫</a></li>
-                <li><a href="javascript:void (0);" typeId="3">电视剧</a></li>
-                <li><a href="javascript:void (0);" typeId="4">IT学习</a></li>
-                <li><a href="javascript:void (0);" typeId="54">0201测试</a></li>
+<%--                <li><a href="javascript:void (0);" typeId="1">电影</a></li>--%>
+<%--                <li><a href="javascript:void (0);" typeId="2">动漫</a></li>--%>
+<%--                <li><a href="javascript:void (0);" typeId="3">电视剧</a></li>--%>
+<%--                <li><a href="javascript:void (0);" typeId="4">IT学习</a></li>--%>
+<%--                <li><a href="javascript:void (0);" typeId="54">0201测试</a></li>--%>
             </ul>
             <hr>
             <ul class="selectList" id="select2">
@@ -74,16 +75,16 @@
             <ul class="selectList" id="select3">
                 <span>地区：</span>
                 <li style="background: #4EBBF9"><a href="javascript:void (0);" style="color: #fff;">全部</a></li>
-                <li><a href="javascript:void (0);">内地</a></li>
-                <li><a href="javascript:void (0);">美国</a></li>
-                <li><a href="javascript:void (0);">香港</a></li>
-                <li><a href="javascript:void (0);">台湾</a></li>
-                <li><a href="javascript:void (0);">日本</a></li>
-                <li><a href="javascript:void (0);">泰国</a></li>
-                <li><a href="javascript:void (0);">印度</a></li>
-                <li><a href="javascript:void (0);">东南亚地区</a></li>
-                <li><a href="javascript:void (0);">欧美地区</a></li>
-                <li><a href="javascript:void (0);">其它</a></li>
+<%--                <li><a href="javascript:void (0);">内地</a></li>--%>
+<%--                <li><a href="javascript:void (0);">美国</a></li>--%>
+<%--                <li><a href="javascript:void (0);">香港</a></li>--%>
+<%--                <li><a href="javascript:void (0);">台湾</a></li>--%>
+<%--                <li><a href="javascript:void (0);">日本</a></li>--%>
+<%--                <li><a href="javascript:void (0);">泰国</a></li>--%>
+<%--                <li><a href="javascript:void (0);">印度</a></li>--%>
+<%--                <li><a href="javascript:void (0);">东南亚地区</a></li>--%>
+<%--                <li><a href="javascript:void (0);">欧美地区</a></li>--%>
+<%--                <li><a href="javascript:void (0);">其它</a></li>--%>
             </ul>
             <hr>
             <ul class="selectList" id="select4">
@@ -137,9 +138,10 @@
      */
     function showCategory(pid) {
         var categoryResult = " <span>类型：</span> <li style=\"background: #4EBBF9\"><a href=\"javascript:void (0);\" style=\"color: #fff;\" categoryId='0'>全部</a></li> ";
-        $.get('category/getByPid/'+pid,function (data) {
-            for (var i = 0; i < data.length; i++) {
-                categoryResult += " <li><a href=\"javascript:void (0);\" categoryId='"+ data[i].id +"'>" + data[i].categoryName + "</a></li> ";
+        $.get('selectItems/getByPid/'+pid,function (data) {
+            var jsonOBJ = eval("("+data+")");
+            for (var i = 0; i < jsonOBJ.length; i++) {
+                categoryResult += " <li><a href=\"javascript:void (0);\" categoryId='"+ jsonOBJ[i].id +"'>" + jsonOBJ[i].categoryName + "</a></li> ";
             }
             $("#select2").html(categoryResult);
         });
@@ -148,10 +150,13 @@
     /**
     *页面加载时展示所有视频信息
     *展示轮播图
+    *展示频道信息
     */
     $(function () {
         showVideo("video/getAll",pageNum,pageSize);
         showCarousel("carousel/getAll");
+        showPd("selectItems/getPd");
+        showArea("selectItems/getArea");
     });
 /*---------------------------初始化、声明变量和方法 end---------------------------------------------------------*/
 
@@ -178,14 +183,19 @@
                     selectCategory = 0;
                     /*根据选择的频道获取下一级的选择条件,如点击动漫，则获取动漫所有类型并展示*/
                     var categoryResult = " <span>类型：</span> " + " <li style=\"background: #4EBBF9\"><a href=\"javascript:void (0);\" style=\"color: #fff;\" categoryId='0'>全部</a></li> ";
-                    switch ($(this).children().html()) {
-                        case '全部': $("#select2").html(categoryResult);break;
-                        case '电影': showCategory(1);break;
-                        case '动漫': showCategory(2);break;
-                        case '电视剧': showCategory(3);break;
-                        case 'IT学习': showCategory(4);break;
-                        case '0201测试': showCategory(55);break;
+                    if (selectType == 0) {
+                        $("#select2").html(categoryResult);
+                    } else {
+                        showCategory(selectType);
                     }
+<%--                    switch ($(this).children().html()) {--%>
+<%--                        case '全部': $("#select2").html(categoryResult);break;--%>
+<%--                        case '电影': showCategory(1);break;--%>
+<%--                        case '动漫': showCategory(2);break;--%>
+<%--                        case '电视剧': showCategory(3);break;--%>
+<%--                        case 'IT学习': showCategory(4);break;--%>
+<%--                        case '0201测试': showCategory(55);break;--%>
+<%--                    }--%>
                     break;
                 case '类型：':
                     selectCategory = $(this).children().attr("categoryId");

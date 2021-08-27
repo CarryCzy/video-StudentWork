@@ -18,7 +18,7 @@ public class CarouselServiceImpl implements CarouselService {
     private CarouselMapper carouselMapper;
 
     @Override
-    public List<Carousel> getAll() {
-        return carouselMapper.getAll();
+    public List<Carousel> getAllByStatus(Integer status) {
+        return carouselMapper.getAllByStatus(status);
     }
 }

@@ -7,11 +7,11 @@ import java.io.Serializable;
  * @author 
  */
 public class Category {
-    private Integer id;
+    private Integer id; //频道或分类id
 
-    private String categoryName;
+    private String categoryName; //频道名或分类名
 
-    private Integer pid;
+    private Integer pid;  //分类--频道自连接
 
     public Integer getId() {
         return id;
