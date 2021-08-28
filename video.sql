@@ -333,3 +333,17 @@ INSERT INTO `carousel` VALUES ('3', '过春天', 'file/video/images/轮播图/�
 INSERT INTO `carousel` VALUES ('4', '慎重勇者', 'file/video/images/轮播图/慎重勇者.jpg');
 INSERT INTO `carousel` VALUES ('5', '超人高中生们', 'file/video/images/轮播图/超人高中生们.jpg');
 INSERT INTO `carousel` VALUES ('6', '好小子', 'file/video/images/轮播图/好小子.jpg');
+
+-- ----------------------------
+-- Table structure for `comment`评论表
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `vId` int(11) NOT NULL,
+  `uId` int(11) NOT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
