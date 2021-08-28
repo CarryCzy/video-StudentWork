@@ -19,6 +19,10 @@
         from video_detail
         where id = #{id,jdbcType=INTEGER}
     </select>
+    <!--根据视频id获取分集信息 c-->
+    <select id="getByVideoId" parameterType="java.lang.Integer" resultType="com.example.pojo.VideoDetail">
+        select * from video_detail where pid = #{pid}
+    </select>
     <delete id="del" parameterType="java.lang.Integer">
         delete from video_detail
         where pid = #{pid,jdbcType=INTEGER}

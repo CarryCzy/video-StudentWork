@@ -122,7 +122,7 @@ public class VideoServiceImpl implements VideoService {
     public Video getVideoWithCategory(int id) {
         return videoMapper.findVideoWithCatrgory(id);
     }
-
+    /*根据视频id获取分集信息 c*/
     public List<VideoDetail> getDetailById(int id){
         return videoDetailMapper.getByVideoId(id);
     }

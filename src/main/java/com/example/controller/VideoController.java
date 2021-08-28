@@ -106,6 +106,13 @@ public class VideoController {
         }
         return videoServiceImpl.getByName(name);
     }
+
+    /**
+     * 跳转视频详情页 c
+     * @param id
+     * @param request
+     * @return
+     */
     @RequestMapping("detail/{id}")
     public String detail(@PathVariable("id")int id, HttpServletRequest request){
         Video video = videoServiceImpl.getById(id);
@@ -115,6 +122,13 @@ public class VideoController {
         return "video/video_detail";
     }
 
+    /**
+     * 视频下载 c
+     * @param request
+     * @param response
+     * @param fileName
+     * @throws IOException
+     */
     @RequestMapping("download")
     public void download(HttpServletRequest request, HttpServletResponse response,String fileName) throws IOException {
         System.out.println(fileName);
@@ -142,6 +156,12 @@ public class VideoController {
         is.close();
     }
 
+    /**
+     * 视频播放 c
+     * @param id
+     * @param req
+     * @return
+     */
     @RequestMapping("play")
     public String play(Integer id,HttpServletRequest req){
         VideoDetail videoDetail = videoServiceImpl.getDetailByDetailId(id);

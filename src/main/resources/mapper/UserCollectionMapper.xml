@@ -28,4 +28,12 @@
       </if>
     </trim>
   </insert>
+  <!--根据用户id 查询收藏视频的list c-->
+  <select id="getById" parameterType="java.lang.Integer" resultType="com.example.pojo.UserCollection">
+    select * from user_collection where uid = #{uid}
+  </select>
+  <!--删除收藏信息 c-->
+  <delete id="del" parameterType="java.lang.Integer">
+    delete from user_collection where uid = #{uid} and vid = #{vid}
+  </delete>
 </mapper>
