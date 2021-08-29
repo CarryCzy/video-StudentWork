@@ -28,7 +28,7 @@
         <div class="layui-logo">视频后台管理系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <a class="layui-layout-left title" style="">
-            用户信息详情
+            演员信息详情
         </a>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
@@ -51,10 +51,10 @@
         <div class="layui-side-scroll">
             <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
             <ul class="layui-nav layui-nav-tree"  lay-filter="test">
-                <li class="layui-nav-item layui-nav-itemed">
+                <li class="layui-nav-item ">
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
-                        <dd class="layui-this"><a href="javascript:;">用户列表</a></dd>
+                        <dd><a href="javascript:;">用户列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -70,10 +70,10 @@
                         <dd><a href="manager/category/add">添加分类</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
+                <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">演员管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="manager/actor/list">演员列表</a></dd>
+                        <dd class="layui-this"><a href="manager/actor/list">演员列表</a></dd>
                         <dd><a href="manager/actor/add">添加演员</a></dd>
                     </dl>
                 </li>
@@ -93,36 +93,28 @@
 
         <div class="detail-div">
             <div class="avatar-div">
-                <img class="avatar-img" src="${user.img}" alt="头像" title="头像">
+                <img class="avatar-img" src="${actor.img_src}" alt="头像" title="头像">
             </div>
             <div class="info-div">
                 <div>
                     <span>用户名：</span>
-                    <span>${user.username}</span>
+                    <span>${actor.name}</span>
                 </div>
                 <div>
-                    <span>密 码：</span>
-                    <span>${user.password}</span>
+                    <span>粉丝量：</span>
+                    <span>${actor.fans}</span>
                 </div>
                 <div>
-                    <span>手机号：</span>
-                    <span>${user.phone}</span>
+                    <span>热 度：</span>
+                    <span>${actor.trend}</span>
                 </div>
                 <div>
-                    <span>年 龄：</span>
-                    <span>${user.age}</span>
-                </div>
-                <div>
-                    <span>生 日：</span>
-                    <span>${user.birthday}</span>
-                </div>
-                <div>
-                    <span>性 别：</span>
-                    <span>${user.sex}</span>
+                    <span>作品量：</span>
+                    <span>${actor.video_number}</span>
                 </div>
 
                 <div style="width: 100%;text-align: center;margin-top: 10px;">
-                    <a style="margin: 0 auto;display: inline-block; height: 30px;line-height: 30px; color: #fff; text-align: center; width: 50px;background: #4EBBF9;" href="jsp/manager/userlist.jsp">返回</a>
+                    <a style="margin: 0 auto;display: inline-block; height: 30px;line-height: 30px; color: #fff; text-align: center; width: 50px;background: #4EBBF9;" href="jsp/manager/actorList.jsp">返回</a>
                 </div>
             </div>
         </div>

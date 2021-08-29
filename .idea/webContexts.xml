@@ -4,6 +4,7 @@
     <option name="state">
       <map>
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/common/header.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/common" />
+        <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/areaList.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/manager" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/categoryList.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/manager" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/manager/videolist.jsp" value="file://$PROJECT_DIR$/src/main/webapp/jsp/manager" />
         <entry key="file://$PROJECT_DIR$/src/main/webapp/jsp/video" value="file://$PROJECT_DIR$/src/main/webapp" />

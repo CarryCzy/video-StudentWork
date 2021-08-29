@@ -64,7 +64,7 @@
                 <li class="layui-nav-item">
                     <a href="jsp/manager/index.jsp">首页</a>
                 </li>
-                <li class="layui-nav-item" onclick="">
+                <li class="layui-nav-item" >
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">用户列表</a></dd>
@@ -87,7 +87,7 @@
                     <a class="" href="javascript:;">演员管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="manager/actor/list">演员列表</a></dd>
-                        <dd><a href="manager/acotr/add">添加演员</a></dd>
+                        <dd><a href="manager/actor/add">添加演员</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -155,8 +155,8 @@
             ,cols: [[
                 {type:'checkbox', width:60, title: '全选'}
                 ,{type:'numbers', width:60, title: '序号'}
-                ,{field:'categoryName', title: '分类名'}
-                ,{field:'phone',  title: '所属频道'
+                ,{field:'category_name', title: '分类名'}
+                ,{field:'pid',  title: '所属频道'
                     ,templet:function (d) {
                     var categories = ${categories};
                     for(var i in categories){
@@ -164,7 +164,7 @@
                             return '<div>无</div>'
                         }
                         if (d.pid == categories[i].id) {
-                            return '<div>'+ categories[i].categoryName +'</div>';
+                            return '<div>'+ categories[i].category_name +'</div>';
                         }
                     }
                 }}
@@ -193,7 +193,7 @@
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             if (layEvent == 'delete'){
-                layer.confirm('确认删除分类 \"'+ data.categoryName + '\" ?', {title:'提示'}, function(index){
+                layer.confirm('确认删除分类 \"'+ data.category_name + '\" ?', {title:'提示'}, function(index){
                     $.get('manager/category/delCategory?id='+data.id,function (data) {
                         if (data.result >= 1){
                             layer.msg("删除成功");

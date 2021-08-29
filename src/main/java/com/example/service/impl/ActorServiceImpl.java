@@ -37,4 +37,24 @@ public class ActorServiceImpl implements ActorService {
     public List<Actor> queryActor(Actor actor) {
         return actorMapper.queryActor(actor);
     }
+
+    @Override
+    public List<Actor> getAll(Integer start, Integer limit) {
+        return actorMapper.getAll(start, limit);
+    }
+
+    @Override
+    public List<Actor> getByName(Actor actor, Integer start, Integer limit) {
+        return actorMapper.getByName(actor, start, limit);
+    }
+
+    @Override
+    public int getActorCount(Actor actor) {
+        return actorMapper.getActorCount(actor);
+    }
+
+    @Override
+    public int getCount() {
+        return actorMapper.getCount();
+    }
 }

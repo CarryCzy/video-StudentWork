@@ -27,7 +27,7 @@
         <div class="layui-logo">想看视频后台管理系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <a class="layui-layout-left title" style="">
-            分类列表
+            添加演员
         </a>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
@@ -68,18 +68,18 @@
                         <dd><a href="manager/video/list">视频列表</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed">
+                <li class="layui-nav-item">
                     <a href="javascript:;">视频分类管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="manager/category/list">视频分类列表</a></dd>
-                        <dd class="layui-this"><a href="manager/category/add">添加分类</a></dd>
+                        <dd><a href="manager/category/add">添加分类</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
+                <li class="layui-nav-item layui-nav-itemed">
                     <a class="" href="javascript:;">演员管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="manager/actor/list">演员列表</a></dd>
-                        <dd><a href="manager/actor/add">添加演员</a></dd>
+                        <dd  class="layui-this"><a href="manager/actor/add">添加演员</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -98,24 +98,26 @@
         <div style="padding: 15px;">
             <div style="width: 50%;margin: 20px auto; border: #beb9b0 solid 1px;border-radius: 5px;">
                 <div style="border-bottom: #beb9b0 solid 1px;height:40px;">
-                    <h2 style="margin:10px 0 10px 15px;">添加分类</h2>
+                    <h2 style="margin:10px 0 10px 15px;">添加演员</h2>
                 </div>
                 <div style="padding:20px;width: 60%;margin: 0 auto;">
                     <form class="layui-form" id="layui-clear-form">
                         <div class="input-line">
-                            <label for="">分类名称：</label>
+                            <label for="">演员名称：</label>
                             <input class="name-input" name="categoryName" type="text">
                         </div>
                         <div class="input-line">
-                            <label for="">所属频道：</label>
-                            <select class="select" name="pid">
-                                <option value="0">无</option>
-                                <c:forEach var="obj" items="${type}">
-                                    <option value="${obj.id}">${obj.categoryName}</option>
-                                </c:forEach>
-                            </select>
+                            <label for="">演员图像路径：</label>
+                            <input class="img-input" name="img_src" type="text">
                         </div>
-
+                        <div class="input-line">
+                            <label for="">粉丝量：</label>
+                            <input class="fans-input" name="fans" type="text">
+                        </div>
+                        <div class="input-line">
+                            <label for="">热度：</label>
+                            <input class="trend-input" name="trend" type="text">
+                        </div>
                         <input type="submit" class="submitBtn">
                     </form>
                 </div>
@@ -141,12 +143,12 @@
             $(".submitBtn").click(function () {
                 var name = $(".name-input").val();
                 if (name == '' || name == null){
-                    layer.msg("请填写分类名称！");
+                    layer.msg("请填写演员名称！");
                 } else{
                     $.ajax({
-                        url:"manager/category/addCategory"
+                        url:"actor/addActor"
                         ,type:'post'
-                        ,data:{'categoryName':name,'pid':$(".select").val()}
+                        ,data:{'name':name,'img_src':$(".img-input").val(),'fans':$(".fans-input").val(),'trend':$(".trend-input").val()}
                         ,success:function (data) {
                             if (data == 1){
                                 layer.msg("添加成功!");

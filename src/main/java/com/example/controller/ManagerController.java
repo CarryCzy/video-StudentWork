@@ -514,18 +514,17 @@ public class ManagerController {
     @RequestMapping(value="category/getAll")
     @ResponseBody
     public Map<String,Object> getAllCategory(Integer page,Integer limit){
-        Map<String,Object> map = new HashMap<>();
         int start = (page-1)*limit;
         List<Category> categories = categoryServiceImpl.getAll(start,limit);
         int count = categoryServiceImpl.getCount();
         if (categories.size() > 0){
-            map.put("code",0);
-            map.put("data",categoryServiceImpl.getAll(start,limit));
-            map.put("count",categoryServiceImpl.getCount());
+            result.put("code",0);
+            result.put("data",categories);
+            result.put("count",count);
         }else {
-            map.put("code",1);
+            result.put("code",1);
         }
-        return map;
+        return result;
     }
 
     /**
@@ -538,18 +537,17 @@ public class ManagerController {
     @RequestMapping("category/getByName")
     @ResponseBody
     public Map<String, Object> getByName(Category category,Integer page,Integer limit){
-        Map<String,Object> map = new HashMap<>();
         Integer start = (page-1)*limit;
         List<Category> list = categoryServiceImpl.getByName(category,start,limit);
         Integer count = categoryServiceImpl.getCategoryCount(category);
         if (list.size() > 0){
-            map.put("code",0);
-            map.put("data",list);
-            map.put("count",count);
+            result.put("code",0);
+            result.put("data",list);
+            result.put("count",count);
         }else {
-            map.put("code",1);
+            result.put("code",1);
         }
-        return map;
+        return result;
     }
     /**
      * 删除分类功能
@@ -585,11 +583,36 @@ public class ManagerController {
 //    }
     @RequestMapping("category/list")
     public String category(HttpServletRequest request){
-//        List<Category> type = categoryServiceImpl.selectAll();
+        List<Category> categories = categoryServiceImpl.selectAll();
         List<Category> type = categoryServiceImpl.selByPid(0);
         request.setAttribute("type",type);
-//        request.setAttribute("type",type);
+        request.setAttribute("categories",categories);
         return "manager/categoryList";
+    }
+
+    /**
+     * 获取分类类型至添加分类页面
+     * @param request
+     * @return 添加分类页面
+     */
+    @RequestMapping("category/add")
+    public String toAddCategory(HttpServletRequest request){
+        List<Category> type = categoryServiceImpl.selByPid(0);
+        request.setAttribute("type",type);
+        return "manager/addCategory";
+    }
+
+    /**
+     *  添加分类
+     * @param category 分类
+     * @param request
+     * @return 0/1 添加是否成功
+     */
+    @RequestMapping("category/addCategory")
+    @ResponseBody
+    public Integer addCategory(Category category,HttpServletRequest request){
+        int i = categoryServiceImpl.insertSelective(category);
+        return i;
     }
     /**
      * 地区分页数据，返回数据给页面json
@@ -650,7 +673,7 @@ public class ManagerController {
 //            //删除视频与地区联合表中该地区的信息。
 //            //videoAreaServiceImpl.del(id);
 //        }
-        return areaServiceImpl.deleteByPrimaryKey(id);
+        return i;
     }
     /**
      * 根据Id查看单个地区信息
@@ -664,9 +687,38 @@ public class ManagerController {
         request.setAttribute("area",area);
         return "manager/area_detail";
     }
-        @RequestMapping("area/list")
+    @RequestMapping("area/list")
     public String area(){
         return "manager/areaList";
     }
 
+    /**
+     * 请求转发到添加地区页面
+     * @return 地区页面
+     */
+    @RequestMapping("area/add")
+    public String toAddArea(){
+        return "manager/addArea";
+    }
+
+    /**
+     *  添加地区
+     * @param area 地区
+     * @param request
+     * @return 0/1 添加是否成功
+     */
+    @RequestMapping("area/addArea")
+    @ResponseBody
+    public Integer addCategory(Area area,HttpServletRequest request){
+        int i = areaServiceImpl.insertSelective(area);
+        return i;
+    }
+    @RequestMapping("actor/list")
+    public String actor(){
+        return "redirect:/actor/list";
+    }
+    @RequestMapping("actor/add")
+    public String toAddActor(){
+        return "manager/addActor";
+    }
 }

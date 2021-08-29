@@ -109,4 +109,43 @@
       </if>
     </where>
   </select>
+  <select id="getAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"></include>
+    from actor limit #{param1},#{param2}
+  </select>
+  <select id="getByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from actor
+    <where>
+      <if test="param1.name!=null and param1.name!=''">
+        `name` like concat('%',#{param1.name},'%')
+      </if>
+      <if test="param1.fans!=null and param1.fans!=0">
+        and fans >= #{param1.fans}
+      </if>
+      <if test="param1.trend!=null and param1.trend!=0">
+        and trend >= #{param1.trend}
+      </if>
+    </where>
+    limit #{param2},#{param3}
+  </select>
+  <select id="getActorCount" parameterType="com.example.pojo.Actor" resultType="java.lang.Integer">
+    select count(*) from actor
+    <where>
+      <if test="name!=null and name!=''">
+        `name` like concat('%',#{name},'%')
+      </if>
+      <if test="fans!=null and fans!=0">
+        and fans like concat('%',#{fans},'%')
+      </if>
+      <if test="trend!=null and trend!=0">
+        and trend like concat('%',#{trend},'%')
+      </if>
+    </where>
+  </select>
+  <select id="getCount"  resultType="integer">
+    select count(*) from actor
+  </select>
 </mapper>

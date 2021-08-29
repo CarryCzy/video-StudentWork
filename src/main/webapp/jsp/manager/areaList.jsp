@@ -64,7 +64,7 @@
                 <li class="layui-nav-item">
                     <a href="jsp/manager/index.jsp">首页</a>
                 </li>
-                <li class="layui-nav-item" onclick="">
+                <li class="layui-nav-item">
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">用户列表</a></dd>
@@ -86,8 +86,8 @@
                 <li class="layui-nav-item">
                     <a class="" href="javascript:;">演员管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="manager/actor/list">演员列表</a></dd>
-                        <dd><a href="manager/acotr/add">添加演员</a></dd>
+                        <dd ><a href="manager/actor/list">演员列表</a></dd>
+                        <dd><a href="manager/actor/add">添加演员</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item layui-nav-itemed">
@@ -177,7 +177,7 @@
             if (layEvent == 'delete'){
                 layer.confirm('确认删除地区 \"'+ data.name + '\" ?', {title:'提示'}, function(index){
                     $.get('manager/area/delArea/'+data.id,function (data) {
-                        if (data.result >= 1){
+                        if (data >= 1){
                             layer.msg("删除成功");
                             obj.del();
                         }else{

@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2021-08-27 17:18:55
+Date: 2021-08-30 00:14:08
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -20,20 +20,22 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `actor`;
 CREATE TABLE `actor` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `img_src` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   `fans` int(11) DEFAULT NULL,
   `trend` int(11) DEFAULT NULL,
   `video_number` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of actor
 -- ----------------------------
-INSERT INTO `actor` VALUES ('1', null, '测试', '199990', '199999', '4');
-INSERT INTO `actor` VALUES ('2', null, '123', '2222', '22222', '1');
+INSERT INTO `actor` VALUES ('1', 'file/video/images/演员图/xiaobai.jpg', '测试', '199990', '199999', '4');
+INSERT INTO `actor` VALUES ('2', 'file/video/images/演员图/xiaobai.jpg', '123', '2222', '22222', '1');
+INSERT INTO `actor` VALUES ('3', 'file/video/images/演员图/xiaobai.jpg', '55555', '12345', '1233', '2');
+INSERT INTO `actor` VALUES ('6', 'file/video/images/演员图/xiaobai.jpg', 'shiro', '999999', '999999', '2');
 
 -- ----------------------------
 -- Table structure for `admins`
@@ -57,10 +59,10 @@ INSERT INTO `admins` VALUES ('1', 'admin', '123', 'static/images/管理员头像
 -- ----------------------------
 DROP TABLE IF EXISTS `area`;
 CREATE TABLE `area` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of area
@@ -76,8 +78,28 @@ INSERT INTO `area` VALUES ('8', '美国');
 INSERT INTO `area` VALUES ('9', '法国');
 INSERT INTO `area` VALUES ('10', '东南亚地区');
 INSERT INTO `area` VALUES ('11', '印度');
-INSERT INTO `area` VALUES ('12', '泰国');
-INSERT INTO `area` VALUES ('13', '英国');
+
+-- ----------------------------
+-- Table structure for `carousel`
+-- ----------------------------
+DROP TABLE IF EXISTS `carousel`;
+CREATE TABLE `carousel` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `title` varchar(20) DEFAULT NULL,
+  `imgSrc` varchar(255) DEFAULT NULL,
+  `status` int(10) DEFAULT '0',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of carousel
+-- ----------------------------
+INSERT INTO `carousel` VALUES ('1', '功夫', 'file/video/images/轮播图/功夫.jpg', '1');
+INSERT INTO `carousel` VALUES ('2', '狄仁杰2四大天王', 'file/video/images/轮播图/狄仁杰2四大天王.jpg', '1');
+INSERT INTO `carousel` VALUES ('3', '过春天', 'file/video/images/轮播图/过春天.jpg', '1');
+INSERT INTO `carousel` VALUES ('4', '慎重勇者', 'file/video/images/轮播图/慎重勇者.jpg', '1');
+INSERT INTO `carousel` VALUES ('5', '超人高中生们', 'file/video/images/轮播图/超人高中生们.jpg', '1');
+INSERT INTO `carousel` VALUES ('6', '好小子', 'file/video/images/轮播图/好小子.jpg', '1');
 
 -- ----------------------------
 -- Table structure for `category`
@@ -88,7 +110,7 @@ CREATE TABLE `category` (
   `category_name` varchar(10) DEFAULT NULL,
   `pid` int(10) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=62 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of category
@@ -143,6 +165,26 @@ INSERT INTO `category` VALUES ('48', 'layui', '4');
 INSERT INTO `category` VALUES ('49', 'android', '4');
 INSERT INTO `category` VALUES ('50', '123', '1');
 INSERT INTO `category` VALUES ('51', '肥皂剧', '3');
+INSERT INTO `category` VALUES ('57', '恐怖向', '1');
+INSERT INTO `category` VALUES ('58', '幼儿向', '2');
+INSERT INTO `category` VALUES ('60', 'java', '4');
+INSERT INTO `category` VALUES ('61', '亲情', '3');
+
+-- ----------------------------
+-- Table structure for `comment`
+-- ----------------------------
+DROP TABLE IF EXISTS `comment`;
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `vId` int(11) NOT NULL,
+  `uId` int(11) NOT NULL,
+  `comment` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of comment
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `history`
@@ -242,6 +284,24 @@ INSERT INTO `videos` VALUES ('35', 'ce', '1', '1', 'file/video/images/hezhao.jpg
 INSERT INTO `videos` VALUES ('38', '青凌团建', '4', '5', 'file/video/images/合照.jpg', '刘力 朱娟 毛玲', '团建游玩', '3', '日本', '2017', '0');
 
 -- ----------------------------
+-- Table structure for `video_actor`
+-- ----------------------------
+DROP TABLE IF EXISTS `video_actor`;
+CREATE TABLE `video_actor` (
+  `video_id` int(11) DEFAULT NULL,
+  `actor_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of video_actor
+-- ----------------------------
+INSERT INTO `video_actor` VALUES ('27', '1');
+INSERT INTO `video_actor` VALUES ('28', '1');
+INSERT INTO `video_actor` VALUES ('34', '1');
+INSERT INTO `video_actor` VALUES ('35', '1');
+INSERT INTO `video_actor` VALUES ('26', '2');
+
+-- ----------------------------
 -- Table structure for `video_area`
 -- ----------------------------
 DROP TABLE IF EXISTS `video_area`;
@@ -312,39 +372,3 @@ INSERT INTO `video_detail` VALUES ('19', '第一级', '1', '123-01.MP4', '2020-1
 INSERT INTO `video_detail` VALUES ('20', '出发', '1', '青凌团建-01.MP4', '2020-10-22 09:55:54', '38');
 INSERT INTO `video_detail` VALUES ('21', '合照', '2', '青凌团建-02.MP4', '2020-10-22 09:56:22', '38');
 INSERT INTO `video_detail` VALUES ('22', '比赛', '3', '青凌团建-03.MP4', '2020-10-22 09:56:51', '38');
-
-
--- ----------------------------
--- Table structure for `carousel`  轮播图管理
--- ----------------------------
-DROP TABLE IF EXISTS `carousel`;
-CREATE TABLE `carousel` (
-                            `id` int(10) NOT NULL AUTO_INCREMENT,
-                            `title` varchar(20) DEFAULT NULL,
-                            `imgSrc` varchar(255) DEFAULT NULL,
-                            `status` int(10) DEFAULT 0,
-                            PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
--- ----------------------------
--- Records of carousel
--- ----------------------------
-INSERT INTO `carousel` VALUES ('1', '功夫', 'file/video/images/轮播图/功夫.jpg', '1');
-INSERT INTO `carousel` VALUES ('2', '狄仁杰2四大天王', 'file/video/images/轮播图/狄仁杰2四大天王.jpg', '1');
-INSERT INTO `carousel` VALUES ('3', '过春天', 'file/video/images/轮播图/过春天.jpg', '1');
-INSERT INTO `carousel` VALUES ('4', '慎重勇者', 'file/video/images/轮播图/慎重勇者.jpg', '1');
-INSERT INTO `carousel` VALUES ('5', '超人高中生们', 'file/video/images/轮播图/超人高中生们.jpg', '1');
-INSERT INTO `carousel` VALUES ('6', '好小子', 'file/video/images/轮播图/好小子.jpg', '1');
-
--- ----------------------------
--- Table structure for `comment`评论表
--- ----------------------------
-DROP TABLE IF EXISTS `comment`;
-CREATE TABLE `comment` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `vId` int(11) NOT NULL,
-  `uId` int(11) NOT NULL,
-  `comment` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------

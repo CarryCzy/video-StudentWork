@@ -31,7 +31,7 @@
         <div class="layui-logo">想看视频后台管理系统</div>
         <!-- 头部区域（可配合layui已有的水平导航） -->
         <a class="layui-layout-left title" style="">
-            用户列表
+            演员列表
         </a>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item">
@@ -60,10 +60,10 @@
                 <li class="layui-nav-item">
                     <a href="jsp/manager/index.jsp">首页</a>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed" onclick="">
+                <li class="layui-nav-item" >
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
-                        <dd class="layui-this"><a href="javascript:;">用户列表</a></dd>
+                        <dd><a href="javascript:;">用户列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -79,10 +79,10 @@
                         <dd><a href="manager/category/add">添加分类</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
+                <li class="layui-nav-item layui-nav-itemed" onclick="">
                     <a class="" href="javascript:;">演员管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="manager/actor/list">演员列表</a></dd>
+                        <dd class="layui-this"><a href="manager/actor/list">演员列表</a></dd>
                         <dd><a href="manager/actor/add">添加演员</a></dd>
                     </dl>
                 </li>
@@ -103,11 +103,11 @@
             <div class="searchDiv">
                 <form>
                     <span style="">搜索栏</span>
-                    <label>用户名：</label>
+                    <label>演员姓名：</label>
                     <input type="text" placeholder="Search">
-                    <label>手机号：</label>
+                    <label>粉丝量：</label>
                     <input type="text" placeholder="Search">
-                    <label>性别：</label>
+                    <label>热度：</label>
                     <input type="text" placeholder="Search">
                     <input type="submit" class="searchBtn" style="" value="搜 索">
                 </form>
@@ -115,7 +115,7 @@
 
             <div style="border: #beb9b0 solid 1px;margin-top: 20px;border-radius: 5px;">
                 <div style="border-bottom: #beb9b0 solid 1px;height:40px;">
-                    <h2 style="margin:10px 0 10px 15px;">用户列表</h2>
+                    <h2 style="margin:10px 0 10px 15px;">演员列表</h2>
                 </div>
                 <div style="padding:20px;">
                     <div id="test" lay-filter="test"></div>
@@ -141,19 +141,18 @@
 
         table.render({
             elem: '#test'
-            ,url:'manager/getAll'
+            ,url:'actor/getAll'
             ,toolbar: 'true'
             ,cols: [[
                 {type:'checkbox', width:60, title: '全选'}
                 ,{type:'numbers', width:60, title: '序号'}
-                ,{field:'username', title: '用户名',minWidth: 80}
-                ,{field:'phone',  title: '手机号',minWidth:100}
-                ,{field:'sex', width:80, title: '性别'}
-                ,{field:'age', title: '年龄', sort: true}
-                ,{field:'birthday', title: '生日'}
+                ,{field:'name', title: '演员姓名',minWidth: 80}
+                ,{field:'fans',  title: '粉丝量',minWidth:100}
+                ,{field:'trend', width:80, title: '热度'}
+                ,{field:'video_number', title: '作品量'}
                 ,{field:'operate',title:'操作'
                     ,templet:function (d) {
-                        return '<div><a href="manager/user/detail/'+ d.id +'" class="operateBtn">查看</a><a class="operateBtn" lay-event="delete">删除</a></div>';
+                        return '<div><a href="actor/detail/'+ d.id +'" class="operateBtn">查看</a><a class="operateBtn" lay-event="delete">删除</a></div>';
                     }
                 }
             ]]
@@ -165,8 +164,8 @@
 
         $(".searchBtn").click(function () {
             table.reload('test',{
-                url:'manager/getByCondition'
-                ,where:{username:$("input:eq(0)").val(),phone:$("input:eq(1)").val(),sex:$("input:eq(2)").val()}
+                url:'actor/getByCondition'
+                ,where:{name:$("input:eq(0)").val(),fans:$("input:eq(1)").val(),trend:$("input:eq(2)").val()}
                 ,method:'post'
             });
             return false;
@@ -176,8 +175,8 @@
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             if (layEvent == 'delete'){
-                layer.confirm('确认删除用户 \"'+ data.username + '\" ?', {title:'提示'}, function(index){
-                    $.get('manager/user/delete/'+data.id,function (data) {
+                layer.confirm('确认删除演员 \"'+ data.name + '\" ?', {title:'提示'}, function(index){
+                    $.get('actor/delActor/'+data.id,function (data) {
                         if (data >= 1){
                             layer.msg("删除成功");
                             obj.del();

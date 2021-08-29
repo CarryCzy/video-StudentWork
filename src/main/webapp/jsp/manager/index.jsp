@@ -72,7 +72,7 @@
                     <a class="" href="javascript:;">演员管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="manager/actor/list">演员列表</a></dd>
-                        <dd><a href="manager/acotr/add">添加演员</a></dd>
+                        <dd><a href="manager/actor/add">添加演员</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
