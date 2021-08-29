@@ -13,6 +13,7 @@
     <script src="static/plugins/layui/layui.js"></script>
     <script src="static/plugins/jquery/jquery.js"></script>
     <script src="static/plugins/webUploader/webuploader.js"></script>
+    <script src="static/js/movie.js"></script>
 
     <style type="text/css">
         .layui-layout-admin .layui-body{bottom: 0;}

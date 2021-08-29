@@ -7,7 +7,7 @@ import org.apache.ibatis.annotations.Select;
 import java.util.List;
 
 public interface VideoDetailMapper {
-    @Select("select * from video_detail where pid = #{pid}")
+    /*根据视频id获取分集信息 c*/
     public List<VideoDetail> getByVideoId(Integer pid);
 
     public VideoDetail getById(Integer id);

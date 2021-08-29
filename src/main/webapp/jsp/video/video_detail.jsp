@@ -93,22 +93,22 @@ layui.use(['layer','element'],function () {
     var fileName = encodeURI(downloadBtn.attr("path"));
     downloadBtn.attr("href","video/download?fileName="+fileName);
     /*未登录不能进行下载*/
-    <%--downloadBtn.click(function () {--%>
-    <%--    if (${sessionScope.user == null}) {--%>
-    <%--        layer.alert("请先登录",{--%>
-    <%--            id:'msg'--%>
-    <%--            ,success:function (layero, index) {--%>
-    <%--                /*按下Enter键时关闭当前窗口*/--%>
-    <%--                $("body").on("keydown",function(event) {--%>
-    <%--                    if(event.keyCode == 13){--%>
-    <%--                        layer.close(index);--%>
-    <%--                    }--%>
-    <%--                });--%>
-    <%--            }--%>
-    <%--        });--%>
-    <%--        return false;--%>
-    <%--    }--%>
-    <%--});--%>
+    downloadBtn.click(function () {
+        if (${sessionScope.user == null}) {
+            layer.alert("请先登录",{
+                id:'msg'
+                ,success:function (layero, index) {
+                    /*按下Enter键时关闭当前窗口*/
+                    $("body").on("keydown",function(event) {
+                        if(event.keyCode == 13){
+                            layer.close(index);
+                        }
+                    });
+                }
+            });
+            return false;
+        }
+    });
 /*---------------------------- 视频下载模块 end -----------------------------------------------------------------------------------------------*/
 
 /*---------------------------- 简介展开与收缩 start -----------------------------------------------------------------------------------------------*/

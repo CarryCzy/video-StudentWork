@@ -17,8 +17,9 @@ public interface VideoMapper {
     @Select("select count(*) from videos")
     int selectCount();
 
-
+    /*根据id获取视频 c*/
     Video selectById(int id);
+
     List<Category> selectCategoryByVideoId(int id);
 
     List<Video> selectAllByCondition(int type, int category, String location, Integer year,int start,int pageSize,Integer pre,Integer last);
