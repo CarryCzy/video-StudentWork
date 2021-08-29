@@ -46,4 +46,29 @@ public class CategoryServiceImpl implements CategoryService {
     public String getNameById(Integer id) {
         return categoryMapper.getNameById(id);
     }
+
+    @Override
+    public List<Category> getAll(Integer start, Integer limit) {
+        return categoryMapper.getAll(start,limit);
+    }
+
+    @Override
+    public List<Category> getByName(Category category, Integer start, Integer limit) {
+        return categoryMapper.getByName(category,start,limit);
+    }
+
+    @Override
+    public int getCategoryCount(Category category) {
+        return categoryMapper.getCategoryCount(category);
+    }
+
+    @Override
+    public int getCount() {
+        return categoryMapper.getCount();
+    }
+
+    @Override
+    public List<Category> selectAll() {
+        return categoryMapper.selectAll();
+    }
 }

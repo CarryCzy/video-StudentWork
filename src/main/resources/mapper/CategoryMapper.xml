@@ -89,4 +89,48 @@
     from category
     where id = #{id}
   </select>
+  <select id="getAll" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+    select
+    <include refid="Base_Column_List"></include>
+    from category limit #{param1},#{param2}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from category
+  </select>
+  <select id="getByName" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"></include>
+    from category
+    <where>
+      <if test="param1.id!=null and param1.id!=0">
+        id like concat('%',#{param1.id},'%')
+      </if>
+      <if test="param1.category_name!=null and param1.category_name!=''">
+        and category_name like concat('%',#{param1.category_name},'%')
+      </if>
+      <if test="param1.pid!=null and param1.pid!=0">
+        and pid like concat('%',#{param1.pid},'%')
+      </if>
+    </where>
+    limit #{param2},#{param3}
+  </select>
+  <select id="getCategoryCount" parameterType="com.example.pojo.Category" resultType="java.lang.Integer">
+    select count(*) from category
+    <where>
+      <if test="id!=null and username !=0">
+        id like concat('%',#{id},'%')
+      </if>
+      <if test="category_name!=null and category_name!= ''">
+        and phone like concat('%',#{phone},'%')
+      </if>
+      <if test="pid!=null and pid!= ''">
+        and pid like concat('%',#{pid},'%')
+      </if>
+    </where>
+  </select>
+  <select id="getCount"  resultType="integer">
+    select count(*) from category
+  </select>
 </mapper>

@@ -6,11 +6,12 @@ import com.example.service.ActorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.List;
 
 @Service
 public class ActorServiceImpl implements ActorService {
-    @Autowired
+    @Resource
     private ActorMapper actorMapper;
     @Override
     public int deleteByPrimaryKey(Integer id) {

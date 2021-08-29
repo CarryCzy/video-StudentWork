@@ -105,7 +105,7 @@
         id like concat('%',#{id},'%')
       </if>
       <if test="name!=null || name != ''">
-        `name` like concat('%',#{name},'%')
+        and `name` like concat('%',#{name},'%')
       </if>
     </where>
   </select>

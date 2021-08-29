@@ -2,10 +2,8 @@ package com.example.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.example.pojo.*;
-import com.example.service.AdminsService;
-import com.example.service.CategoryService;
-import com.example.service.UserService;
-import com.example.service.VideoService;
+import com.example.service.*;
+import com.example.service.impl.AreaServiceImpl;
 import com.example.utils.CodeImageUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
@@ -36,7 +34,13 @@ public class ManagerController {
     @Resource
     private CategoryService categoryServiceImpl;
     @Resource
+    private VideoCategoryService videoCategoryServiceImpl;
+    @Resource
     private UserService userServiceImpl;
+    @Resource
+    private ActorService actorServiceImpl;
+    @Resource
+    private AreaService areaServiceImpl;
     //存储返回给页面的对象数据
     private Map<String, Object> result = new HashMap<>();
 
@@ -501,8 +505,168 @@ public class ManagerController {
         }
         return videoServiceImpl.delDetailByDetailId(id);
     }
+    /**
+     * 视频分类分页数据，返回数据给页面json
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping(value="category/getAll")
+    @ResponseBody
+    public Map<String,Object> getAllCategory(Integer page,Integer limit){
+        Map<String,Object> map = new HashMap<>();
+        int start = (page-1)*limit;
+        List<Category> categories = categoryServiceImpl.getAll(start,limit);
+        int count = categoryServiceImpl.getCount();
+        if (categories.size() > 0){
+            map.put("code",0);
+            map.put("data",categoryServiceImpl.getAll(start,limit));
+            map.put("count",categoryServiceImpl.getCount());
+        }else {
+            map.put("code",1);
+        }
+        return map;
+    }
 
+    /**
+     * 根据条件查询分类分页，
+     * @param category 分类查询条件
+     * @param page 页面
+     * @param limit 每页条数
+     * @return
+     */
+    @RequestMapping("category/getByName")
+    @ResponseBody
+    public Map<String, Object> getByName(Category category,Integer page,Integer limit){
+        Map<String,Object> map = new HashMap<>();
+        Integer start = (page-1)*limit;
+        List<Category> list = categoryServiceImpl.getByName(category,start,limit);
+        Integer count = categoryServiceImpl.getCategoryCount(category);
+        if (list.size() > 0){
+            map.put("code",0);
+            map.put("data",list);
+            map.put("count",count);
+        }else {
+            map.put("code",1);
+        }
+        return map;
+    }
+    /**
+     * 删除分类功能
+     * @param id
+     * @return 0/1 是否删除成功
+     */
+    @RequestMapping("category/delCategory")
+    @ResponseBody
+    public Integer delCategory(@PathVariable("id")Integer id){
+        int i = categoryServiceImpl.delCategory(id);
+        if (i>0){
+            //删除分类成功，删除该分类视频分类联合表下的信息。
+            videoCategoryServiceImpl.delVideoCategory(id);
+        }
+        return i;
+    }
+    /**
+     * 根据Id查看单个分类信息
+     * @param id
+     * @param request
+     * @return
+     */
+    @RequestMapping("category/detail/{id}")
+    public String categoryDetail(@PathVariable("id")Integer id,HttpServletRequest request){
+        Category category = categoryServiceImpl.selectByPrimaryKey(id);
+        System.out.println(category);
+        request.setAttribute("category",category);
+        return "manager/user_detail";
+    }
+//    @RequestMapping("category/list")
+//    public String category(){
+//        return "manager/categoryList";
+//    }
+    @RequestMapping("category/list")
+    public String category(HttpServletRequest request){
+//        List<Category> type = categoryServiceImpl.selectAll();
+        List<Category> type = categoryServiceImpl.selByPid(0);
+        request.setAttribute("type",type);
+//        request.setAttribute("type",type);
+        return "manager/categoryList";
+    }
+    /**
+     * 地区分页数据，返回数据给页面json
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping(value="area/getAll")
+    @ResponseBody
+    public Map<String,Object> getAreaAll(Integer page,Integer limit){
+        int start = (page-1)*limit;
+        List<Area> areaList = areaServiceImpl.getAll(start,limit);
+        int count = areaServiceImpl.getCount();
+        if (areaList.size() > 0){
+            result.put("code",0);
+            result.put("data",areaList);
+            result.put("count",count);
+        }else {
+            result.put("code",1);
+        }
+        return result;
+    }
 
-
+    /**
+     * 根据条件查询地区分页，
+     * @param area 地区查询条件
+     * @param page 页面
+     * @param limit 每页条数
+     * @return
+     */
+    @RequestMapping("area/getByName")
+    @ResponseBody
+    public Map<String, Object> getByName(Area area,Integer page,Integer limit){
+        Integer start = (page-1)*limit;
+        List<Area> list = areaServiceImpl.getByName(area,start,limit);
+        Integer count = areaServiceImpl.getCountByName(area);
+        if (list.size() > 0){
+            result.put("code",0);
+            result.put("data",list);
+            result.put("count",count);
+        }else {
+            result.put("code",1);
+        }
+        return result;
+    }
+    /**
+     * 删除地区功能
+     * @param id
+     * @return 0/1 是否删除成功
+     */
+    @RequestMapping("area/delArea/{id}")
+    @ResponseBody
+    public Integer delArea(@PathVariable("id")Integer id){
+        int i = areaServiceImpl.deleteByPrimaryKey(id);
+//        if (i>0){
+//            //删除地区成功，修改该地区下视频的地区状态为空
+//            //videoServiceImpl.updateVideoArea(id);
+//            //删除视频与地区联合表中该地区的信息。
+//            //videoAreaServiceImpl.del(id);
+//        }
+        return areaServiceImpl.deleteByPrimaryKey(id);
+    }
+    /**
+     * 根据Id查看单个地区信息
+     * @param id
+     * @param request
+     * @return
+     */
+    @RequestMapping("area/detail/{id}")
+    public String areaDetail(@PathVariable("id")Integer id,HttpServletRequest request){
+        Area area = areaServiceImpl.selectByPrimaryKey(id);
+        request.setAttribute("area",area);
+        return "manager/area_detail";
+    }
+        @RequestMapping("area/list")
+    public String area(){
+        return "manager/areaList";
+    }
 
 }

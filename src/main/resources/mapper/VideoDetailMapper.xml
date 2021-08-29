@@ -37,7 +37,7 @@
             <if test="title != null">
                 title = #{title,jdbcType=VARCHAR},
             </if>
-            <if test="episode != null || episode!=0">
+            <if test="episode != null and episode!=0">
                 episode = #{episode},
             </if>
             <if test="file_name != null">
@@ -46,7 +46,7 @@
             <if test="upload_date != null">
                 upload_date = #{upload_date,jdbcType=DATE},
             </if>
-            <if test="pid!= null || pid!=0">
+            <if test="pid!= null and pid!=0">
                 pid = #{pid,jdbcType=INTEGER},
             </if>
         </set>

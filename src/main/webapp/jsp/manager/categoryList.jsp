@@ -83,6 +83,20 @@
                         <dd><a href="manager/category/add">添加分类</a></dd>
                     </dl>
                 </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;">演员管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="manager/actor/list">演员列表</a></dd>
+                        <dd><a href="manager/acotr/add">添加演员</a></dd>
+                    </dl>
+                </li>
+                <li class="layui-nav-item">
+                    <a class="" href="javascript:;">地区管理</a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="manager/area/list">地区列表</a></dd>
+                        <dd><a href="manager/area/add">添加地区</a></dd>
+                    </dl>
+                </li>
             </ul>
         </div>
     </div>
@@ -156,7 +170,7 @@
                 }}
                 ,{field:'operate',title:'操作'
                     ,templet:function (d) {
-                        return '<div><a href="manager/user/detail/'+ d.id +'" class="operateBtn">查看</a><a class="operateBtn" lay-event="delete">删除</a></div>';
+                        return '<div><a href="manager/category/detail/'+ d.id +'" class="operateBtn">查看</a><a class="operateBtn" lay-event="delete">删除</a></div>';
                     }
                 }
             ]]

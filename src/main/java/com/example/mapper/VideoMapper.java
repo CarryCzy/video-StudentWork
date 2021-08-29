@@ -62,4 +62,5 @@ public interface VideoMapper {
             "left join history on v.id = history.vid " +
             "where v.id = #{id}")
     int del(Integer id);
+
 }

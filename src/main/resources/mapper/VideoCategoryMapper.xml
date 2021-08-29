@@ -28,4 +28,7 @@
       </if>
     </trim>
   </insert>
+  <delete id="delVideoCategory" parameterType="java.lang.Integer">
+    delete from video_category where category_id = #{id}
+  </delete>
 </mapper>
