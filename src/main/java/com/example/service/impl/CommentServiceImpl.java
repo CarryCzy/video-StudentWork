@@ -1,10 +1,13 @@
 package com.example.service.impl;
 
 import com.example.mapper.CommentMapper;
+import com.example.page.PageInfo;
 import com.example.pojo.Comment;
 import com.example.service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -38,5 +41,16 @@ public class CommentServiceImpl implements CommentService {
     @Override
     public int updateByPrimaryKey(Comment comment) {
         return commentMapper.updateByPrimaryKey(comment);
+    }
+
+    @Override
+    public int getCountByVid(int vid) {
+        return commentMapper.getCountByVid(vid);
+    }
+
+    @Override
+    public List<Comment> getAllByVid(int vid, PageInfo pageInfo) {
+        int start = (pageInfo.getPageNum()-1)*pageInfo.getPageSize();
+        return commentMapper.getAllByVid(vid,start,pageInfo.getPageSize());
     }
 }

@@ -18,4 +18,20 @@ public class Comment implements Serializable {
     private String comment;
 
     private static final long serialVersionUID = 1L;
+
+    public Comment() {
+    }
+
+    public Comment(Integer id, Integer vid, Integer uid, String comment) {
+        this.id = id;
+        this.vid = vid;
+        this.uid = uid;
+        this.comment = comment;
+    }
+
+    public Comment(Integer vid, Integer uid, String comment) {
+        this.vid = vid;
+        this.uid = uid;
+        this.comment = comment;
+    }
 }
