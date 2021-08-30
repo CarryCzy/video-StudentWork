@@ -5,10 +5,10 @@
     <result column="video_category_video_id" jdbcType="INTEGER" property="video_id" />
     <result column="video_category_category_id" jdbcType="INTEGER" property="category_id" />
   </resultMap>
-  <insert id="insert" parameterType="com.example.pojo.VideoCategory">
+  <!--<insert id="insert" parameterType="com.example.pojo.VideoCategory">
     insert into video_category (video_id, category_id)
     values (#{video_id,jdbcType=INTEGER}, #{category_id,jdbcType=INTEGER})
-  </insert>
+  </insert>-->
   <insert id="insertSelective" parameterType="com.example.pojo.VideoCategory">
     insert into video_category
     <trim prefix="(" suffix=")" suffixOverrides=",">

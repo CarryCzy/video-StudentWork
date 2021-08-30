@@ -66,6 +66,7 @@ public interface VideoService {
 
     int delDetailByDetailId(Integer id);
 
+    public int updateVideoArea(Integer id);
     /*查询视频年代（过滤重复）yxy */
     List<Video> selVideosDate();
 

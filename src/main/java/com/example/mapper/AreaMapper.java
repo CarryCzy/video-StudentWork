@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import com.example.pojo.Area;
 import com.example.pojo.Category;
+import org.apache.ibatis.annotations.Delete;
 
 import java.util.List;
 
@@ -24,4 +25,6 @@ public interface AreaMapper {
     public int getCount();
     //根据条件查询，获取地区列表数量
     public int getCountByName(Area area);
+    @Delete("delete a,va from area a left join video_area va on a.id = va.area_id")
+    public int delArea(Integer id);
 }

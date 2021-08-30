@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="static/css/video_detail.css">
     <script src="static/plugins/layui/layui.js"></script>
     <script src="static/plugins/jquery/jquery.js"></script>
+    <script src="static/js/comment.js"></script>
 </head>
 <body>
     <jsp:include page="/jsp/common/header.jsp"/>
@@ -74,6 +75,27 @@
                     </li>
                 </C:forEach>
             </ul>
+        </div>
+
+        <%--c--%>
+        <div class="hrFont">
+            <div></div>
+            <span>用户评论</span>
+            <div></div>
+        </div>
+
+        <%--评论及展示区域 c--%>
+        <div class="comment">
+            <%--提交评论--%>
+            <div class="comment_submit">
+                   <textarea cols="20" rows="5" id="getcom">
+                   </textarea>
+                <button id="subcombtn" style="background: #30aaff">点击提交</button>
+            </div>
+            <%--展示该视频相关评论--%>
+            <div class="commentDiv">
+
+            </div>
         </div>
     </div>
 
@@ -193,6 +215,54 @@ layui.use(['layer','element'],function () {
 
     });
 /*---------------------------- 收藏视频 end -----------------------------------------------------------------------------------------------*/
+
+/*---------------------------- 提交评论 c start -------------------------------------------------------------------------------------------*/
+/**
+ *页面加载时展示所有评论
+ */
+$(function () {
+    showComment("comment/getAll/"+video.id,1,pageInfo.pageSize);
+    location.href="#skip";
+});
+
+
+/*点击提交评论*/
+var subcombtn = $("#subcombtn");
+var getcom = $("#getcom").val();
+
+
+/*绑定提交点击事件*/
+subcombtn.click(function (){
+    /*未登录*/
+    if (${sessionScope.user == null}) {
+        layer.alert("请先登录", {
+            id: 'msg'
+            , success: function (layero, index) {
+                /*按下Enter键时关闭当前窗口*/
+                $("body").on("keydown", function (event) {
+                    if (event.keyCode == 13) {
+                        layer.close(index);
+                    }
+                });
+            }
+        });
+        return false;
+        /*已登录*/
+    }else {
+        $.ajax({
+            url:'comment/add/'
+            ,method:'post'
+            ,data:{
+                "vid":${video.id},
+                "comment":getcom}
+            ,success:function () {
+                showComment("comment/getAll/"+video.id,1,pageInfo.pageSize);
+                location.href="#skip";
+            }
+        });
+    }
+});
+/*---------------------------- 提交评论 c end ---------------------------------------------------------------------------------------------*/
 });
 
 </script>

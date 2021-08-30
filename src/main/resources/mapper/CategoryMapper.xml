@@ -119,7 +119,7 @@
   <select id="getCategoryCount" parameterType="com.example.pojo.Category" resultType="java.lang.Integer">
     select count(*) from category
     <where>
-      <if test="id!=null and username !=0">
+      <if test="id!=null and id !=0">
         id like concat('%',#{id},'%')
       </if>
       <if test="category_name!=null and category_name!= ''">

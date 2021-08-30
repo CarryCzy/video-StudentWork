@@ -5,6 +5,7 @@ import com.example.pojo.Video;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import java.util.List;
 
@@ -63,6 +64,10 @@ public interface VideoMapper {
             "left join history on v.id = history.vid " +
             "where v.id = #{id}")
     int del(Integer id);
+    //删除地区后，修改视频表的地区为空
+    @Update("update videos v left join area a on v.location = a.name left join video_area va on " +
+            "a.id = va.area_id set v.location = null where a.id=#{id}")
+    public int updateVideoArea(Integer id);
     //查询视频年代（过滤重复）yxy
     List<Video> selVideosDate();
     //查询用户收藏 yxy

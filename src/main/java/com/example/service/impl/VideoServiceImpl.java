@@ -183,6 +183,10 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
+    public int updateVideoArea(Integer id) {
+        return videoMapper.updateVideoArea(id);
+    }
+    @Override
     public List<Video> selVideosDate() {
         return videoMapper.selVideosDate();
     }

@@ -57,4 +57,9 @@ public class ActorServiceImpl implements ActorService {
     public int getCount() {
         return actorMapper.getCount();
     }
+
+    @Override
+    public int del(Integer id) {
+        return actorMapper.del(id);
+    }
 }

@@ -23,4 +23,5 @@ public interface AreaService {
     public int getCount();
     //根据条件查询，获取地区列表数量
     public int getCountByName(Area area);
+    public int delArea(Integer id);
 }

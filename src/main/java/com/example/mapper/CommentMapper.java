@@ -2,6 +2,8 @@ package com.example.mapper;
 
 import com.example.pojo.Comment;
 
+import java.util.List;
+
 public interface CommentMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,10 @@ public interface CommentMapper {
     int updateByPrimaryKeySelective(Comment comment);
 
     int updateByPrimaryKey(Comment comment);
+
+    /*查询评论的总数 c*/
+    int getCountByVid(int vid);
+
+    /*根据视频id查询评论并分页 c*/
+    List<Comment> getAllByVid(int vid, int start, int pageSize);
 }

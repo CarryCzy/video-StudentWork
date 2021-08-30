@@ -23,5 +23,7 @@ public interface ActorService {
     public int getActorCount(Actor actor);
     //统计演员数量
     public int getCount();
+    public int del(Integer id);
+
 
 }

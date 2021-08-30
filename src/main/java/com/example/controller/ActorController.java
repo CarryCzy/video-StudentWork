@@ -79,7 +79,7 @@ public class ActorController {
     @RequestMapping("delActor/{id}")
     @ResponseBody
     public Integer delActor(@PathVariable("id")Integer id){
-        int i = actorServiceImpl.deleteByPrimaryKey(id);
+        int i = actorServiceImpl.del(id);
         return i;
     }
     /**

@@ -163,15 +163,15 @@
 
         table.render({
             elem: '#test'
-            ,url:'manager/category/getAll'
+            ,url:'manager/category/getCategories'
             ,toolbar: 'true'
             ,cols: [[
                 {type:'checkbox', width:60, title: '全选'}
-                ,{type:'numbers', width:60, title: '序号'}
-                ,{field:'category_name', title: '分类名'}
+                ,{type:'id', width:60, title: '序号'}
+                ,{field:'categoryName', title: '分类名'}
                 ,{field:'pid',  title: '所属频道'
                     ,templet:function (d) {
-                    var categories = ${categories};
+                    var categories = '${categories}';
                     for(var i in categories){
                         if (d.pid == '0') {
                             return '<div>无</div>'
@@ -183,7 +183,7 @@
                 }}
                 ,{field:'operate',title:'操作'
                     ,templet:function (d) {
-                        return '<div><a href="manager/category/detail/'+ d.id +'" class="operateBtn">查看</a><a class="operateBtn" lay-event="delete">删除</a></div>';
+                        return '<div><a class="operateBtn" lay-event="delete">删除</a></div>';
                     }
                 }
             ]]
