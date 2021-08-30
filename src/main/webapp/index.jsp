@@ -90,17 +90,17 @@
             <ul class="selectList" id="select4">
                 <span>年代：</span>
                 <li style="background: #4EBBF9"><a href="javascript:void (0);" style="color: #fff;">全部</a></li>
-                <li><a href="javascript:void (0);">2019</a></li>
-                <li><a href="javascript:void (0);">2018</a></li>
-                <li><a href="javascript:void (0);">2017</a></li>
-                <li><a href="javascript:void (0);">2016</a></li>
-                <li><a href="javascript:void (0);">2015</a></li>
-                <li><a href="javascript:void (0);">2014</a></li>
-                <li><a href="javascript:void (0);">2013</a></li>
-                <li><a href="javascript:void (0);">2012</a></li>
-                <li><a href="javascript:void (0);">2011</a></li>
-                <li><a href="javascript:void (0);">2010-2000</a></li>
-                <li><a href="javascript:void (0);">更早</a></li>
+<%--                <li><a href="javascript:void (0);">2019</a></li>--%>
+<%--                <li><a href="javascript:void (0);">2018</a></li>--%>
+<%--                <li><a href="javascript:void (0);">2017</a></li>--%>
+<%--                <li><a href="javascript:void (0);">2016</a></li>--%>
+<%--                <li><a href="javascript:void (0);">2015</a></li>--%>
+<%--                <li><a href="javascript:void (0);">2014</a></li>--%>
+<%--                <li><a href="javascript:void (0);">2013</a></li>--%>
+<%--                <li><a href="javascript:void (0);">2012</a></li>--%>
+<%--                <li><a href="javascript:void (0);">2011</a></li>--%>
+<%--                <li><a href="javascript:void (0);">2010-2000</a></li>--%>
+<%--                <li><a href="javascript:void (0);">更早</a></li>--%>
             </ul>
         </div>
 
@@ -157,6 +157,7 @@
         showCarousel("carousel/getAll");
         showPd("selectItems/getPd");
         showArea("selectItems/getArea");
+        showDate("selectItems/getDate");
     });
 /*---------------------------初始化、声明变量和方法 end---------------------------------------------------------*/
 

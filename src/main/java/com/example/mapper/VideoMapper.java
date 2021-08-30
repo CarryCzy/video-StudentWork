@@ -64,8 +64,15 @@ public interface VideoMapper {
             "left join history on v.id = history.vid " +
             "where v.id = #{id}")
     int del(Integer id);
+<<<<<<< HEAD
     //删除地区后，修改视频表的地区为空
     @Update("update videos v left join area a on v.location = a.name left join video_area va on " +
             "a.id = va.area_id set v.location = null where a.id=#{id}")
     public int updateVideoArea(Integer id);
+=======
+    //查询视频年代（过滤重复）yxy
+    List<Video> selVideosDate();
+    //查询用户收藏 yxy
+    List<Video> selUserCollection(Integer uid);
+>>>>>>> bbc15aa893fe4ae88f04caece208f9d974ecb973
 }

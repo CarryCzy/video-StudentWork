@@ -147,17 +147,17 @@
                     <div class="layui-input-inline" style="width: 150px;">
                         <select name="year" lay-filter="year" id="year">
                             <option value="">--请选择--</option>
-                            <option value="2019" <c:if test="${year == '2019'}">selected="selected"</c:if>>2019</option>
-                            <option value="2018" <c:if test="${year == '2018'}">selected="selected"</c:if>>2018</option>
-                            <option value="2017" <c:if test="${year == '2017'}">selected="selected"</c:if>>2017</option>
-                            <option value="2016" <c:if test="${year == '2016'}">selected="selected"</c:if>>2016</option>
-                            <option value="2015" <c:if test="${year == '2015'}">selected="selected"</c:if>>2015</option>
-                            <option value="2014" <c:if test="${year == '2014'}">selected="selected"</c:if>>2014</option>
-                            <option value="2013" <c:if test="${year == '2013'}">selected="selected"</c:if>>2013</option>
-                            <option value="2012" <c:if test="${year == '2012'}">selected="selected"</c:if>>2012</option>
-                            <option value="2011" <c:if test="${year == '2011'}">selected="selected"</c:if>>2011</option>
-                            <option value="2010-2000">2010-2000</option>"
-                            <option value="更早">更早</option>
+                            <script>
+                                var yearHtml = " <option value=\"\">--请选择--</option> ";
+                                var uri = "selectItems/getDate";
+                                $.get(uri, function (data) {
+                                    var yearArray = data.split("/");
+                                    for (var i = 0; i < yearArray.length-1; i++) {
+                                        yearHtml += " <option value="+ yearArray[i] +" >" + yearArray[i] + "</option> ";
+                                    }
+                                    $("#year").html(yearHtml);
+                                });
+                            </script>
                         </select>
                     </div>
 
@@ -249,7 +249,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label" for="type2">所属频道：</label>
             <div class="layui-input-inline">
-                <select name="type" lay-filter="type2" id="type2">
+                <select name="type" lay-filter="type2" id="type2" class="pd">
                     <option value="">--请选择--</option>
                     <c:forEach items="${type}" var="obj">
                         <option value="${obj.id}" <c:if test="${video.type == obj.id}">selected="selected"</c:if>>${obj.categoryName}</option>
@@ -294,16 +294,17 @@
             <div class="layui-input-inline">
                 <select id="location2" name="location" lay-filter="location">
                     <option value="">--请选择--</option>
-                    <option value="内地">内地</option>
-                    <option value="美国">美国</option>
-                    <option value="香港">香港</option>
-                    <option value="台湾">台湾</option>
-                    <option value="日本">日本</option>
-                    <option value="泰国">泰国</option>
-                    <option value="印度">印度</option>
-                    <option value="东南亚地区">东南亚地区</option>
-                    <option value="欧美地区">欧美地区</option>
-                    <option value="其他">其他</option>
+                    <script>
+                        var areaHtml = " <option value=\"\">--请选择--</option> ";
+                        var uri = "selectItems/getArea";
+                        $.get(uri, function (data) {
+                            var jsonOBJ = eval("("+data+")");
+                            for (var i = 0; i < jsonOBJ.length; i++) {
+                                areaHtml += " <option value="+ jsonOBJ[i].name +" >" + jsonOBJ[i].name + "</option> ";
+                            }
+                            $("#location2").html(areaHtml);
+                        });
+                    </script>
                 </select>
             </div>
         </div>
@@ -368,7 +369,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label" for="type2">所属频道：</label>
             <div class="layui-input-inline">
-                <select name="type" lay-filter="type3" id="type3">
+                <select name="type" lay-filter="type3" id="type3" class="pd">
                     <option value="">--请选择--</option>
                     <c:forEach items="${type}" var="obj">
                         <option value="${obj.id}" <c:if test="${video.type == obj.id}">selected="selected"</c:if>>${obj.categoryName}</option>
@@ -413,16 +414,17 @@
             <div class="layui-input-inline">
                 <select id="location3" name="location" lay-filter="location">
                     <option value="">--请选择--</option>
-                    <option value="内地">内地</option>
-                    <option value="美国">美国</option>
-                    <option value="香港">香港</option>
-                    <option value="台湾">台湾</option>
-                    <option value="日本">日本</option>
-                    <option value="泰国">泰国</option>
-                    <option value="印度">印度</option>
-                    <option value="东南亚地区">东南亚地区</option>
-                    <option value="欧美地区">欧美地区</option>
-                    <option value="其他">其他</option>
+                    <script>
+                        var areaHtml = " <option value=\"\">--请选择--</option> ";
+                        var uri = "selectItems/getArea";
+                        $.get(uri, function (data) {
+                            var jsonOBJ = eval("("+data+")");
+                            for (var i = 0; i < jsonOBJ.length; i++) {
+                                areaHtml += " <option value="+ jsonOBJ[i].name +" >" + jsonOBJ[i].name + "</option> ";
+                            }
+                            $("#location3").html(areaHtml);
+                        });
+                    </script>
                 </select>
             </div>
         </div>
@@ -501,16 +503,17 @@ layui.use(['element','table','layer','jquery','form','laydate','upload'], functi
             var html = '<option value="">--请选择--</option>';
             var selected = '';
             $.ajax({
-                url:'manager/video/getCategoryByPid/'+type
+                url:'selectItems/getBypid/'+type
                 ,success:function (data) {
-                    for (var i = 0; i <data.length;i++){
-                        if (data[i].id == category){
-                            console.log(data[i].id + " " +category);
+                    var jsonOBJ = eval("("+data+")");
+                    for (var i = 0; i <jsonOBJ.length;i++){
+                        if (jsonOBJ[i].id == category){
+                            console.log(jsonOBJ[i].id + " " +category);
                             selected = 'selected';
                         }else{
                             selected = '';
                         }
-                        html += '<option value="'+ data[i].id +'"'+ selected +'>'+ data[i].categoryName +'</option>'
+                        html += '<option value="'+ jsonOBJ[i].id +'"'+ selected +'>'+ jsonOBJ[i].categoryName +'</option>'
                 }
                     $("#category").html(html);
                     form.render();
@@ -552,10 +555,11 @@ layui.use(['element','table','layer','jquery','form','laydate','upload'], functi
                                 layerForm.render();
                             }else{
                                 $.ajax({
-                                    url:'manager/video/getCategoryByPid/'+type
+                                    url:'selectItems/getByPid/'+type
                                     ,success:function (data) {
-                                        for (var i = 0; i <data.length;i++){
-                                            html += '<option value="'+ data[i].id +'">'+ data[i].categoryName +'</option>'
+                                        var jsonOBJ = eval("("+data+")");
+                                        for (var i = 0; i <jsonOBJ.length;i++){
+                                            html += '<option value="'+ jsonOBJ[i].id +'">'+ jsonOBJ[i].categoryName +'</option>'
                                         }
                                         $("#category2,#category3,#category4").html(html);
                                         layerForm.render();
@@ -624,10 +628,11 @@ layui.use(['element','table','layer','jquery','form','laydate','upload'], functi
                             layerForm.render();
                         }else{
                             $.ajax({
-                                url:'manager/video/getCategoryByPid/'+type
+                                url:'selectItems/getByPid/'+type
                                 ,success:function (data) {
-                                    for (var i = 0; i <data.length;i++){
-                                        html += '<option value="'+ data[i].id +'">'+ data[i].categoryName +'</option>'
+                                    var jsonOBJ = eval("("+data+")");
+                                    for (var i = 0; i <jsonOBJ.length;i++){
+                                        html += '<option value="'+ jsonOBJ[i].id +'">'+ jsonOBJ[i].categoryName +'</option>'
                                     }
                                     $("#category5,#category6,#category7").html(html);
                                     layerForm.render();
@@ -717,10 +722,11 @@ layui.use(['element','table','layer','jquery','form','laydate','upload'], functi
             form.render();
         }else{
             $.ajax({
-                url:'manager/video/getCategoryByPid/'+type
+                url:'selectItems/getByPid/'+type
                 ,success:function (data) {
-                    for (var i = 0; i <data.length;i++){
-                        html += '<option value="'+ data[i].id +'">'+ data[i].categoryName +'</option>'
+                    var jsonOBJ = eval("("+data+")");
+                    for (var i = 0; i <jsonOBJ.length;i++){
+                        html += '<option value="'+ jsonOBJ[i].id +'">'+ jsonOBJ[i].categoryName +'</option>'
                     }
                     $("#category").html(html);
                     form.render();
@@ -894,7 +900,7 @@ layui.use(['element','table','layer','jquery','form','laydate','upload'], functi
             }
         }
     });
-})
+});
 </script>
 </body>
 </html>
