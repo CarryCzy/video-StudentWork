@@ -183,10 +183,10 @@ public class VideoServiceImpl implements VideoService {
     }
 
     @Override
-<<<<<<< HEAD
     public int updateVideoArea(Integer id) {
         return videoMapper.updateVideoArea(id);
-=======
+    }
+    @Override
     public List<Video> selVideosDate() {
         return videoMapper.selVideosDate();
     }
@@ -194,6 +194,5 @@ public class VideoServiceImpl implements VideoService {
     @Override
     public List<Video> selUserCollection(Integer uid) {
         return videoMapper.selUserCollection(uid);
->>>>>>> bbc15aa893fe4ae88f04caece208f9d974ecb973
     }
 }
