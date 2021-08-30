@@ -511,19 +511,14 @@ public class ManagerController {
      * @param limit
      * @return
      */
-    @RequestMapping(value="category/getAll")
+    @RequestMapping(value="/category/getCategories")
     @ResponseBody
-    public Map<String,Object> getAllCategory(Integer page,Integer limit){
+    public Map<String,Object> getAllCategory(Integer page,Integer limit) throws IOException {
         int start = (page-1)*limit;
         List<Category> categories = categoryServiceImpl.getAll(start,limit);
-        int count = categoryServiceImpl.getCount();
-        if (categories.size() > 0){
-            result.put("code",0);
-            result.put("data",categories);
-            result.put("count",count);
-        }else {
-            result.put("code",1);
-        }
+        result.put("code", 0);
+        result.put("count", categoryServiceImpl.getCount());
+        result.put("data", categories);
         return result;
     }
 
@@ -534,7 +529,7 @@ public class ManagerController {
      * @param limit 每页条数
      * @return
      */
-    @RequestMapping("category/getByName")
+    @RequestMapping("/category/getByName")
     @ResponseBody
     public Map<String, Object> getByName(Category category,Integer page,Integer limit){
         Integer start = (page-1)*limit;
@@ -573,20 +568,15 @@ public class ManagerController {
     @RequestMapping("category/detail/{id}")
     public String categoryDetail(@PathVariable("id")Integer id,HttpServletRequest request){
         Category category = categoryServiceImpl.selectByPrimaryKey(id);
-        System.out.println(category);
-        request.setAttribute("category",category);
-        return "manager/user_detail";
-    }
-//    @RequestMapping("category/list")
-//    public String category(){
-//        return "manager/categoryList";
-//    }
-    @RequestMapping("category/list")
-    public String category(HttpServletRequest request){
         List<Category> categories = categoryServiceImpl.selectAll();
+        request.setAttribute("category",category);
+        request.setAttribute("categories",categories);
+        return "manager/category_detail";
+    }
+    @RequestMapping("category/list")
+    public String categoryList(HttpServletRequest request){
         List<Category> type = categoryServiceImpl.selByPid(0);
         request.setAttribute("type",type);
-        request.setAttribute("categories",categories);
         return "manager/categoryList";
     }
 
@@ -666,13 +656,11 @@ public class ManagerController {
     @RequestMapping("area/delArea/{id}")
     @ResponseBody
     public Integer delArea(@PathVariable("id")Integer id){
-        int i = areaServiceImpl.deleteByPrimaryKey(id);
-//        if (i>0){
-//            //删除地区成功，修改该地区下视频的地区状态为空
-//            //videoServiceImpl.updateVideoArea(id);
-//            //删除视频与地区联合表中该地区的信息。
-//            //videoAreaServiceImpl.del(id);
-//        }
+        int i = areaServiceImpl.delArea(id);
+        if (i>0){
+            //删除地区成功，修改该地区下视频的地区状态为空
+            videoServiceImpl.updateVideoArea(id);
+        }
         return i;
     }
     /**

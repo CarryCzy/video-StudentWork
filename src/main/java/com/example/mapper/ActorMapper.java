@@ -2,6 +2,7 @@ package com.example.mapper;
 
 import com.example.pojo.Actor;
 import com.example.pojo.Category;
+import org.apache.ibatis.annotations.Delete;
 
 import java.util.List;
 
@@ -24,4 +25,7 @@ public interface ActorMapper {
     public int getActorCount(Actor actor);
     //统计演员数量
     public int getCount();
+    //删除演员，同时删除视频演员联合表
+    @Delete("delete a,va from actor a left join video_actor va on a.id = va.actor_id where id = #{id}")
+    public int del(Integer id);
 }

@@ -65,4 +65,6 @@ public interface VideoService {
     void delDetail(Integer id);
 
     int delDetailByDetailId(Integer id);
+
+    public int updateVideoArea(Integer id);
 }

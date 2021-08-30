@@ -56,4 +56,9 @@ public class AreaServiceImpl implements AreaService {
     public int getCountByName(Area area) {
         return areaMapper.getCountByName(area);
     }
+
+    @Override
+    public int delArea(Integer id) {
+        return areaMapper.delArea(id);
+    }
 }

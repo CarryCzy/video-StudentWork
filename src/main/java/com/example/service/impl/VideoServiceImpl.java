@@ -181,4 +181,9 @@ public class VideoServiceImpl implements VideoService {
     public int delDetailByDetailId(Integer id) {
         return videoDetailMapper.delByDetailId(id);
     }
+
+    @Override
+    public int updateVideoArea(Integer id) {
+        return videoMapper.updateVideoArea(id);
+    }
 }
