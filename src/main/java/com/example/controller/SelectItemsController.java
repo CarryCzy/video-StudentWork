@@ -3,15 +3,20 @@ package com.example.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.example.pojo.Area;
 import com.example.pojo.Category;
+import com.example.pojo.Video;
 import com.example.service.AreaService;
 import com.example.service.CategoryService;
+import com.example.service.VideoService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,6 +28,9 @@ public class SelectItemsController {
 
     @Resource
     private AreaService areaService;
+
+    @Resource
+    private VideoService videoService;
 
     /**
      * 动态获取所有频道
@@ -61,6 +69,23 @@ public class SelectItemsController {
         List<Area> list = areaService.selectAll();
         String jsonString = JSONArray.toJSONString(list);
         response.getWriter().println(jsonString);
+    }
+
+    /**
+     * 获取现有年代
+     * @throws IOException
+     */
+    @RequestMapping("/getDate")
+    @ResponseBody
+    public String getDate() throws IOException {
+        List<Video> list = videoService.selVideosDate();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy");
+        String s = "";
+        for (int i = 0; i < list.size(); i++) {
+            Date date = list.get(i).getPublishDate();
+            s += format.format(date) + "/";
+        }
+        return s;
     }
 
 }

@@ -274,4 +274,15 @@
     </where>
     group by name
   </select>
+  <select id="selVideosDate" resultMap="VideoResultMap">
+    select * from videos
+    group by publish_date
+    desc
+  </select>
+
+  <select id="selUserCollection" parameterType="java.lang.Integer" resultType="com.example.pojo.Video">
+    select * from videos v, user_collection c
+    where v.id = c.vid
+    and c.uid = #{uid}
+  </select>
 </mapper>

@@ -65,4 +65,10 @@ public interface VideoService {
     void delDetail(Integer id);
 
     int delDetailByDetailId(Integer id);
+
+    /*查询视频年代（过滤重复）yxy */
+    List<Video> selVideosDate();
+
+    /*查询用户收藏 yxy */
+    List<Video> selUserCollection(Integer uid);
 }

@@ -63,5 +63,8 @@ public interface VideoMapper {
             "left join history on v.id = history.vid " +
             "where v.id = #{id}")
     int del(Integer id);
-
+    //查询视频年代（过滤重复）yxy
+    List<Video> selVideosDate();
+    //查询用户收藏 yxy
+    List<Video> selUserCollection(Integer uid);
 }

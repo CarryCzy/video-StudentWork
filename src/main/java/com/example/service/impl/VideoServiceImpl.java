@@ -181,4 +181,14 @@ public class VideoServiceImpl implements VideoService {
     public int delDetailByDetailId(Integer id) {
         return videoDetailMapper.delByDetailId(id);
     }
+
+    @Override
+    public List<Video> selVideosDate() {
+        return videoMapper.selVideosDate();
+    }
+
+    @Override
+    public List<Video> selUserCollection(Integer uid) {
+        return videoMapper.selUserCollection(uid);
+    }
 }

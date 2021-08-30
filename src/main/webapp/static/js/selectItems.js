@@ -26,3 +26,17 @@ function showArea(uri){
         areaList.html(areaHtml);
     });
 }
+/**
+ * 获取所有年代并展示
+ */
+function showDate(uri){
+    var dateList = $("#select4");
+    var dateHtml = " <span>年代：</span> <li style=\"background: #4EBBF9\"><a href=\"javascript:void (0);\" style=\"color: #fff;\">全部</a></li> ";
+    $.get(uri, function (data) {
+        var dateArray = data.split("/");
+        for (var i = 0; i < dateArray.length-1; i++) {
+            dateHtml += " <li><a href=\"javascript:void (0);\" >" + dateArray[i] + "</a></li> ";
+        }
+        dateList.html(dateHtml);
+    });
+}
