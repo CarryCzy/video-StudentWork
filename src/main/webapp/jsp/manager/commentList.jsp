@@ -97,7 +97,6 @@
                     <a href="javascript:;">轮播图管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="manager/carousel/list">轮播图列表</a></dd>
-                        <dd><a href="manager/carousel/list">上传轮播图</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">

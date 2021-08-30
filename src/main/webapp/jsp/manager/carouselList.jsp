@@ -116,11 +116,7 @@
             <div class="searchDiv">
                 <form>
                     <span style="">搜索栏</span>
-                    <label>用户名：</label>
-                    <input type="text" placeholder="Search">
-                    <label>手机号：</label>
-                    <input type="text" placeholder="Search">
-                    <label>性别：</label>
+                    <label>名称：</label>
                     <input type="text" placeholder="Search">
                     <input type="submit" class="searchBtn" style="" value="搜 索">
                 </form>
@@ -128,7 +124,7 @@
 
             <div style="border: #beb9b0 solid 1px;margin-top: 20px;border-radius: 5px;">
                 <div style="border-bottom: #beb9b0 solid 1px;height:40px;">
-                    <h2 style="margin:10px 0 10px 15px;">用户列表</h2>
+                    <h2 style="margin:10px 0 10px 15px;">轮播图列表</h2>
                 </div>
                 <div style="padding:20px;">
                     <div id="test" lay-filter="test"></div>
@@ -154,19 +150,24 @@
 
         table.render({
             elem: '#test'
-            ,url:'manager/getAll'
+            ,url:'manager/carousel/getAll'
             ,toolbar: 'true'
             ,cols: [[
                 {type:'checkbox', width:60, title: '全选'}
                 ,{type:'numbers', width:60, title: '序号'}
-                ,{field:'username', title: '用户名',minWidth: 80}
-                ,{field:'phone',  title: '手机号',minWidth:100}
-                ,{field:'sex', width:80, title: '性别'}
-                ,{field:'age', title: '年龄', sort: true}
-                ,{field:'birthday', title: '生日'}
+                ,{field:'title', title: '名称',minWidth: 60}
+                ,{field:'imgSrc',  title: '图片路径',minWidth:80}
+                ,{field:'status', width:100, title: '图片状态',templet:function (d) {
+                    if (d.status == '0') {
+                        return '<div><a href="manager/carousel/updateStatus/'+ d.id +'/' +d.status+'" class="operateBtn">不显示</a></div>'
+                    }
+                    if (d.status == '1') {
+                        return '<div><a href="manager/carousel/updateStatus/'+ d.id +'/' +d.status+'" class="operateBtn">显示</a></div>';
+                    }
+            }}
                 ,{field:'operate',title:'操作'
                     ,templet:function (d) {
-                        return '<div><a href="manager/user/detail/'+ d.id +'" class="operateBtn">查看</a><a class="operateBtn" lay-event="delete">删除</a></div>';
+                        return '<div><a href="manager/carousel/detail/'+ d.id +'" class="operateBtn">查看</a><a class="operateBtn" lay-event="delete">删除</a></div>';
                     }
                 }
             ]]
@@ -178,8 +179,8 @@
 
         $(".searchBtn").click(function () {
             table.reload('test',{
-                url:'manager/getByCondition'
-                ,where:{username:$("input:eq(0)").val(),phone:$("input:eq(1)").val(),sex:$("input:eq(2)").val()}
+                url:'manager/carousel/getByCondition'
+                ,where:{title:$("input:eq(0)").val()}
                 ,method:'post'
             });
             return false;
@@ -189,8 +190,8 @@
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             if (layEvent == 'delete'){
-                layer.confirm('确认删除用户 \"'+ data.username + '\" ?', {title:'提示'}, function(index){
-                    $.get('manager/user/delete/'+data.id,function (data) {
+                layer.confirm('确认删除轮播图 \"'+ data.title + '\" ?', {title:'提示'}, function(index){
+                    $.get('manager/carousel/delete/'+data.id,function (data) {
                         if (data >= 1){
                             layer.msg("删除成功");
                             obj.del();

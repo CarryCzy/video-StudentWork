@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.mapper.CarouselMapper;
 import com.example.pojo.*;
 import com.example.service.*;
 import com.example.service.impl.AreaServiceImpl;
@@ -41,6 +42,8 @@ public class ManagerController {
     private ActorService actorServiceImpl;
     @Resource
     private AreaService areaServiceImpl;
+    @Resource
+    private CarouselService carouselServiceImpl;
     //存储返回给页面的对象数据
     private Map<String, Object> result = new HashMap<>();
 
@@ -170,6 +173,13 @@ public class ManagerController {
         return userServiceImpl.deleteById(id);
     }
 
+    /**
+     * 根据条件查询用户功能
+     * @param user
+     * @param page
+     * @param limit
+     * @return
+     */
     @RequestMapping("getByCondition")
     @ResponseBody
     public Map<String, Object> getByCondition(User user,Integer page,Integer limit){
@@ -721,4 +731,81 @@ public class ManagerController {
     public String toAddActor(){
         return "manager/addActor";
     }
+
+    /**
+     * 跳转至轮博图列表页面
+     * @return
+     */
+    @RequestMapping("carousel/list")
+    public String carouselList(){
+        return "manager/carouselList";
+    }
+
+    /**
+     * 查询全部轮播图
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping("carousel/getAll")
+    @ResponseBody
+    public Map<String,Object> carouselGetAll(Integer page,Integer limit){
+        int start = (page-1)*limit;
+        List<Carousel> list = carouselServiceImpl.getAll(start,limit);
+        int count = carouselServiceImpl.getCountByCondition(null);
+        if (list.size() > 0){
+            result.put("code",0);
+            result.put("data",list);
+            result.put("count",count);
+        }else {
+            result.put("code",1);
+        }
+        return result;
+    }
+
+    /**
+     * 更改轮播图状态
+     * @param id
+     * @param status
+     * @return
+     */
+    @RequestMapping("carousel/updateStatus/{id}/{status}")
+    public String updateStatus(@PathVariable("id") int id,@PathVariable("status") int status){
+        int i = carouselServiceImpl.updateStatus(id,status);
+        return "manager/carouselList";
+    }
+    /**
+     * 删除轮播图功能
+     * @param id
+     * @return
+     */
+    @RequestMapping("carousel/delete/{id}")
+    @ResponseBody
+    public Integer delCarousel(@PathVariable("id")Integer id){
+        return carouselServiceImpl.deleteById(id);
+    }
+
+    /**
+     * 根据条件查询轮播图功能
+     * @param carousel
+     * @param page
+     * @param limit
+     * @return
+     */
+    @RequestMapping("carousel/getByCondition")
+    @ResponseBody
+    public Map<String, Object> getByCondition(Carousel carousel,Integer page,Integer limit){
+        Integer start = (page-1)*limit;
+        List<Carousel> list = carouselServiceImpl.getByCondition(carousel,start,limit);
+        Integer count = carouselServiceImpl.getCountByCondition(carousel);
+        if (list.size() > 0){
+            result.put("code",0);
+            result.put("data",list);
+            result.put("count",count);
+        }else {
+            result.put("code",1);
+        }
+        return result;
+    }
+
 }

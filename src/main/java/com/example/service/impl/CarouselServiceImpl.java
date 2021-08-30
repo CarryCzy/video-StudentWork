@@ -21,4 +21,29 @@ public class CarouselServiceImpl implements CarouselService {
     public List<Carousel> getAllByStatus(Integer status) {
         return carouselMapper.getAllByStatus(status);
     }
+
+    @Override
+    public List<Carousel> getAll(Integer start, Integer limit) {
+        return carouselMapper.getAll(start,limit);
+    }
+
+    @Override
+    public List<Carousel> getByCondition(Carousel carousel, Integer start, Integer limit) {
+        return carouselMapper.getByCondition(carousel, start, limit);
+    }
+
+    @Override
+    public Integer getCountByCondition(Carousel carousel) {
+        return carouselMapper.getCountByCondition(carousel);
+    }
+
+    @Override
+    public int updateStatus(int id,int status) {
+        return carouselMapper.updateStatus( id, status);
+    }
+
+    @Override
+    public int deleteById(int id) {
+        return carouselMapper.deleteById(id);
+    }
 }

@@ -10,7 +10,24 @@
   <sql id="Base_Column_List">
     id, title, imgSrc, status
   </sql>
-
+  <!-- 更改轮播图状态-->
+  <update id="updateStatus">
+    update carousel
+    <set>
+      <if test="status == 0">
+        status = 1,
+      </if>
+      <if test="status == 1">
+        status = 0,
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <!--根据id删除轮博图-->
+  <delete id="deleteById" parameterType="com.example.pojo.Carousel">
+    delete from carousel where id = #{id}
+  </delete>
+  <!--通过状态查询全部-->
   <select id="getAllByStatus" parameterType="com.example.pojo.Carousel" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -18,4 +35,34 @@
     where status = #{status,jdbcType=INTEGER}
   </select>
 
+  <!-- 分页查询所有轮播图-->
+    <select id="getAll" resultMap="BaseResultMap">
+       select
+       <include refid="Base_Column_List" />
+        from carousel
+        limit #{param1},#{param2}
+    </select>
+  <!-- 获取用户总数-->
+  <select id="getCountByCondition" parameterType="com.example.pojo.Carousel" resultType="java.lang.Integer">
+    select count(*) from carousel
+    <where>
+      <if test="title != null || title != '' ">
+        title like concat('%',#{title},'%')
+      </if>
+      <if test="status != null || status != '' ">
+        and status like concat('%',#{status},'%')
+      </if>
+    </where>
+  </select>
+  <select id="getByCondition" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from carousel
+    <where>
+      <if test="param1.title != null || param1.title != ''">
+        title like concat('%',#{param1.title},'%')
+      </if>
+    </where>
+    limit #{param2},#{param3}
+  </select>
 </mapper>
