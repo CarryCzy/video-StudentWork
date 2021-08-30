@@ -22,7 +22,7 @@ public class CarouselController {
     private CarouselService carouselService;
 
     /**
-     * 获取所有轮播图对象
+     * 获取 status==1 的轮播图对象
      * @return
      */
     @RequestMapping("/getAll")
