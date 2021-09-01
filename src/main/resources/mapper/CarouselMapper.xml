@@ -10,7 +10,34 @@
   <sql id="Base_Column_List">
     id, title, imgSrc, status
   </sql>
-  <!-- 更改轮播图状态-->
+  <!-- 新增轮播图-->
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.example.pojo.Carousel" useGeneratedKeys="true">
+         insert into carousel
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+        <if test="title != null">
+          title,
+        </if>
+        <if test="imgSrc != null">
+          imgSrc,
+        </if>
+          status,
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <if test="title != null">
+          #{title},
+        </if>
+        <if test="imgSrc != null">
+          #{imgSrc},
+        </if>
+        <if test="status != null">
+          #{status},
+        </if>
+        <if test="status == null">
+          0,
+        </if>
+      </trim>
+    </insert>
+    <!-- 更改轮播图状态-->
   <update id="updateStatus">
     update carousel
     <set>

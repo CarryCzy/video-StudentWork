@@ -58,4 +58,6 @@ public interface UserService {
 
     //检查用户名是否存在
     User selectByUsername(String username);
+    //根据用户名查询用户id
+    int getUIdByName(String userName);
 }

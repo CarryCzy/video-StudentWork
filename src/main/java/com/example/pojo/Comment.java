@@ -17,6 +17,9 @@ public class Comment implements Serializable {
 
     private String comment;
 
+    private String userName;
+
+    private String videoName;
     private static final long serialVersionUID = 1L;
 
     public Comment() {
@@ -33,5 +36,14 @@ public class Comment implements Serializable {
         this.vid = vid;
         this.uid = uid;
         this.comment = comment;
+    }
+
+    public Comment(Integer id, Integer vid, Integer uid, String comment, String userName, String videoName) {
+        this.id = id;
+        this.vid = vid;
+        this.uid = uid;
+        this.comment = comment;
+        this.userName = userName;
+        this.videoName = videoName;
     }
 }

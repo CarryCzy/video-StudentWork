@@ -97,7 +97,7 @@
                     <a href="javascript:;">轮播图管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="manager/carousel/list">轮播图列表</a></dd>
-                        <dd><a href="manager/carousel/list">上传轮播图</a></dd>
+                        <dd><a href="manager/carousel/add">上传轮播图</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -167,7 +167,7 @@
             }}
                 ,{field:'operate',title:'操作'
                     ,templet:function (d) {
-                        return '<div><a href="manager/carousel/detail/'+ d.id +'" class="operateBtn">查看</a><a class="operateBtn" lay-event="delete">删除</a></div>';
+                        return '<div><a class="operateBtn" lay-event="delete">删除</a></div>';
                     }
                 }
             ]]

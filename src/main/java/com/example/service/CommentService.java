@@ -24,4 +24,18 @@ public interface CommentService {
 
     /*根据视频id查询评论并分页 c*/
     List<Comment> getAllByVid(int vid, PageInfo pageInfo);
+    /**
+     * 分页查询评论（联表查询）
+     * @param comment
+     * @param start
+     * @param limit
+     * @return
+     */
+    List<Comment> selCommentByCondition(Comment comment, int start, int limit);
+    //根据uid获取用户名
+    String getUserNameByUId(Integer uId);
+    //根据vid获取视频名
+    String getVideoNameByVId(Integer vId);
+    //根据条件获取评论总数
+    Integer getCount(Comment comment);
 }

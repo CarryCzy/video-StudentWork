@@ -44,6 +44,8 @@ public class ManagerController {
     private AreaService areaServiceImpl;
     @Resource
     private CarouselService carouselServiceImpl;
+    @Resource
+    private CommentService commentServiceImpl;
     //存储返回给页面的对象数据
     private Map<String, Object> result = new HashMap<>();
 
@@ -795,5 +797,125 @@ public class ManagerController {
         }
         return result;
     }
+    /**
+     * 跳转至轮博图上传页面
+     * @return
+     */
+    @RequestMapping("carousel/add")
+    public String addCarousel(){
+        return "manager/addCarousel";
+    }
+    /**
+     * 添加轮博图
+     * @param carousel
+     * @return
+     */
+    @RequestMapping("carousel/addCarousel")
+    public String register(Carousel carousel){
+        carouselServiceImpl.insertSelective(carousel);
+        return "manager/carouselList";
+    }
+    /**
+     * 上传轮播图
+     * @param file
+     * @param request
+     * @return res{code,src}
+     */
+    @RequestMapping("carousel/imageUpload")
+    @ResponseBody
+    public Map<String, Object> imageUpload(@RequestParam("file")MultipartFile file, HttpServletRequest request){
 
+        if (file.isEmpty()){
+            result.put("code",0);
+        } else {
+            String fileName = file.getOriginalFilename();
+            String path = request.getServletContext().getRealPath("file/video/images/轮播图/");
+            //图片路径
+            String rappendix = "file/video/images/轮播图/" + fileName;
+            //上传文件
+            fileName = path + "/" + fileName;
+            File file1 = new File(fileName);
+            try {
+                file.transferTo(file1);
+                //返回值
+                result.put("code",1);
+                result.put("src", rappendix);
+            } catch (IOException e) {
+                result.put("code",0);
+            }
+        }
+        return result;
+    }
+
+
+    /**
+     * 跳转至评论列表页面
+     * @return
+     */
+    @RequestMapping("comment/list")
+    public String toList(){
+        return "manager/commentList";
+    }
+    /**
+     * 根据条件分页查询评论
+     * @param comment 查询条件
+     * @param page 页面
+     * @param limit 每页条数
+     * @return
+     */
+    @RequestMapping("comment/getAll")
+    @ResponseBody
+    public Map<String, Object> getAll(Comment comment,Integer page,Integer limit){
+        Integer start = (page-1)*limit;
+        List<Comment> list = commentServiceImpl.selCommentByCondition(comment,start,limit);
+        Integer count = commentServiceImpl.getCount(comment);
+        if (list.size() > 0){
+            result.put("code",0);
+            result.put("data",list);
+            result.put("count",count);
+        }else {
+            result.put("code",1);
+        }
+        return result;
+    }
+    /**
+     * 搜索评论功能
+     * @param comment 查询条件
+     * @param page 页面
+     * @param limit 每页条数
+     * @return
+     */
+    @RequestMapping("comment/getByCondition")
+    @ResponseBody
+    public Map<String, Object> getComByCondition(Comment comment,Integer page,Integer limit){
+        Integer start = (page-1)*limit;
+        if ( !"".equals(comment.getUserName().trim()) || comment.getUserName().length() > 0){
+            int uId = userServiceImpl.getUIdByName(comment.getUserName());
+            comment.setUid(uId);
+        }
+        if ( !"".equals(comment.getVideoName().trim()) || comment.getVideoName().length() > 0){
+            int vId = videoServiceImpl.getVIdByName(comment.getVideoName());
+            comment.setUid(vId);
+        }
+        List<Comment> list = commentServiceImpl.selCommentByCondition(comment,start,limit);
+        Integer count = commentServiceImpl.getCount(comment);
+        if (list.size() > 0){
+            result.put("code",0);
+            result.put("data",list);
+            result.put("count",count);
+        }else {
+            result.put("code",1);
+        }
+        return result;
+    }
+    /**
+     * 删除评论功能
+     * @param id
+     * @return
+     */
+    @RequestMapping("comment/delete/{id}")
+    @ResponseBody
+    public Integer delComment(@PathVariable("id")Integer id){
+        return commentServiceImpl.deleteByPrimaryKey(id);
+    }
 }

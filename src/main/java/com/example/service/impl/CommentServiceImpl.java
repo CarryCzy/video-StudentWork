@@ -53,4 +53,24 @@ public class CommentServiceImpl implements CommentService {
         int start = (pageInfo.getPageNum()-1)*pageInfo.getPageSize();
         return commentMapper.getAllByVid(vid,start,pageInfo.getPageSize());
     }
+
+    @Override
+    public List<Comment> selCommentByCondition(Comment comment, int start, int limit) {
+        return commentMapper.selCommentByCondition(comment, start, limit);
+    }
+
+    @Override
+    public String getUserNameByUId(Integer uId) {
+        return commentMapper.getUserNameByUId(uId);
+    }
+
+    @Override
+    public String getVideoNameByVId(Integer vId) {
+        return commentMapper.getVideoNameByVId(vId);
+    }
+
+    @Override
+    public Integer getCount(Comment comment) {
+        return commentMapper.getCount(comment);
+    }
 }

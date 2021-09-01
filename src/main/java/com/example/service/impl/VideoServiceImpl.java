@@ -195,4 +195,9 @@ public class VideoServiceImpl implements VideoService {
     public List<Video> selUserCollection(Integer uid) {
         return videoMapper.selUserCollection(uid);
     }
+
+    @Override
+    public int getVIdByName(String name) {
+        return videoMapper.getVIdByName(name);
+    }
 }

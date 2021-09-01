@@ -72,4 +72,7 @@ public interface VideoMapper {
     List<Video> selVideosDate();
     //查询用户收藏 yxy
     List<Video> selUserCollection(Integer uid);
+
+    //根据视频名查询用户id
+    int getVIdByName(String name);
 }

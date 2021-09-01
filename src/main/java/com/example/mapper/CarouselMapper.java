@@ -47,4 +47,11 @@ public interface CarouselMapper {
      * @return
      */
     int deleteById(int id);
+
+    /**
+     * 新增轮播图
+     * @param carousel
+     * @return
+     */
+    int insertSelective(Carousel carousel);
 }

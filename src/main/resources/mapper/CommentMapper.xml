@@ -7,6 +7,21 @@
     <result column="uId" jdbcType="INTEGER" property="uid" />
     <result column="comment" jdbcType="VARCHAR" property="comment" />
   </resultMap>
+  <!--分页查询评论（联表查询）-->
+  <resultMap id="CommentResultMap" type="com.example.pojo.Comment">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="vId" jdbcType="INTEGER" property="vid" />
+    <result column="uId" jdbcType="INTEGER" property="uid" />
+    <result column="comment" jdbcType="VARCHAR" property="comment" />
+    <association property="userName" column="uId"
+                 select="getUserNameByUId">
+    </association>
+    <association property="videoName" column="vId"
+                select="getVideoNameByVId">
+    </association>
+  </resultMap>
+
+
   <sql id="Base_Column_List">
     id, vId, `uId`, `comment`
   </sql>
@@ -16,6 +31,8 @@
     from comment
     where id = #{id,jdbcType=INTEGER}
   </select>
+    <select id="getCountByVid" resultType="java.lang.Integer"></select>
+  <select id="getAllByVid" resultType="com.example.pojo.Comment"></select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from comment
     where id = #{id,jdbcType=INTEGER}
@@ -73,4 +90,43 @@
       `comment` = #{comment,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <!--根据条件分页查询-->
+  <select id="selCommentByCondition" resultMap="CommentResultMap">
+    select *  from comment c
+    left join user u on c.uId = u.id
+    left join videos v on c.vId = v.id
+    <where>
+      <if test="param1.comment != null and param1.comment != ''">
+        c.comment like concat('%',#{param1.comment},'%')
+      </if>
+      <if test="param1.uid != null and param1.uid != 0">
+        and c.uId like #{param1.uid}
+      </if>
+      <if test="param1.vid != null and param1.vid != 0">
+        and c.vId = #{param1.vid}
+      </if>
+    </where>
+    limit #{param2},#{param3}
+  </select>
+  <select id="getUserNameByUId" resultType="java.lang.String">
+        select username from user where id = #{uId}
+  </select>
+  <select id="getVideoNameByVId" resultType="java.lang.String">
+        select NAME from videos where id = #{vId}
+  </select>
+  <!--根据条件获取评论总数-->
+  <select id="getCount" resultType="java.lang.Integer">
+    select count(*) from comment
+    <where>
+      <if test="comment != null and comment != ''">
+        comment like concat('%',#{comment},'%')
+      </if>
+      <if test="uid != null and uid != 0">
+        and uId = #{uid}
+      </if>
+      <if test="vid != null and vid != 0">
+        and vId = #{vid}
+      </if>
+    </where>
+  </select>
 </mapper>

@@ -46,4 +46,9 @@ public class CarouselServiceImpl implements CarouselService {
     public int deleteById(int id) {
         return carouselMapper.deleteById(id);
     }
+
+    @Override
+    public int insertSelective(Carousel carousel) {
+        return carouselMapper.insertSelective(carousel);
+    }
 }

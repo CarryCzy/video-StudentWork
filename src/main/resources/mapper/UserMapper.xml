@@ -171,6 +171,10 @@
       </if>
     </where>
   </select>
+  <!-- 根据用户名查询用户id -->
+  <select id="getUIdByName" resultType="java.lang.Integer">
+    select id from user where username = #{param1}
+  </select>
   <!-- 根据id删除用户 -->
   <delete id="deleteById" parameterType="com.example.pojo.User">
         delete from user where id = #{id}
