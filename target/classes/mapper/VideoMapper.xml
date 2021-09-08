@@ -285,4 +285,7 @@
     where v.id = c.vid
     and c.uid = #{uid}
   </select>
+  <select id="getVIdByName" resultType="java.lang.Integer">
+    select id from videos where NAME = #{param1}
+  </select>
 </mapper>

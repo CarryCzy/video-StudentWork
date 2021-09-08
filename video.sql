@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50556
 File Encoding         : 65001
 
-Date: 2021-08-30 00:14:08
+Date: 2021-09-08 22:14:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -62,7 +62,7 @@ CREATE TABLE `area` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of area
@@ -89,7 +89,7 @@ CREATE TABLE `carousel` (
   `imgSrc` varchar(255) DEFAULT NULL,
   `status` int(10) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of carousel
@@ -139,9 +139,6 @@ INSERT INTO `category` VALUES ('22', '文艺', '1');
 INSERT INTO `category` VALUES ('23', '热血', '2');
 INSERT INTO `category` VALUES ('24', '爱情', '2');
 INSERT INTO `category` VALUES ('25', '搞笑', '2');
-INSERT INTO `category` VALUES ('26', '少儿', '2');
-INSERT INTO `category` VALUES ('27', '亲子', '2');
-INSERT INTO `category` VALUES ('28', '魔法', '2');
 INSERT INTO `category` VALUES ('29', '运动', '2');
 INSERT INTO `category` VALUES ('30', '机战', '2');
 INSERT INTO `category` VALUES ('31', '科幻', '2');
@@ -180,7 +177,7 @@ CREATE TABLE `comment` (
   `uId` int(11) NOT NULL,
   `comment` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of comment
@@ -271,7 +268,7 @@ CREATE TABLE `videos` (
   `publish_date` year(4) DEFAULT NULL,
   `finished` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=47 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of videos
@@ -282,6 +279,9 @@ INSERT INTO `videos` VALUES ('28', '测试', '123', '123', 'file/video/images/�
 INSERT INTO `videos` VALUES ('34', 'ces', '1', '1', 'file/video/images/ces.jpg', '测试', '1', '1', '内地', '2019', '0');
 INSERT INTO `videos` VALUES ('35', 'ce', '1', '1', 'file/video/images/hezhao.jpg', '测试', '1', '1', '内地', '2019', '0');
 INSERT INTO `videos` VALUES ('38', '青凌团建', '4', '5', 'file/video/images/合照.jpg', '刘力 朱娟 毛玲', '团建游玩', '3', '日本', '2017', '0');
+INSERT INTO `videos` VALUES ('40', '55555', '1', '3', 'file/video/images/xiaobai.jpg', '123', null, '1', '内地', '2015', '0');
+INSERT INTO `videos` VALUES ('45', '11', '1', '12', 'file/video/images/xiaobai.jpg', '111', '1', '1', '香港', '2019', '0');
+INSERT INTO `videos` VALUES ('46', '12345', '1', '11', 'file/video/images/xiaobai.jpg', '111111', '1', '2', '内地', '2014', '0');
 
 -- ----------------------------
 -- Table structure for `video_actor`
@@ -350,6 +350,21 @@ INSERT INTO `video_category` VALUES ('35', '5');
 INSERT INTO `video_category` VALUES ('38', '51');
 INSERT INTO `video_category` VALUES ('38', '51');
 INSERT INTO `video_category` VALUES ('38', '51');
+INSERT INTO `video_category` VALUES ('45', '5');
+INSERT INTO `video_category` VALUES ('45', '7');
+INSERT INTO `video_category` VALUES ('45', '8');
+INSERT INTO `video_category` VALUES ('46', '23');
+INSERT INTO `video_category` VALUES ('46', '26');
+INSERT INTO `video_category` VALUES ('46', '25');
+INSERT INTO `video_category` VALUES ('26', '5');
+INSERT INTO `video_category` VALUES ('26', '5');
+INSERT INTO `video_category` VALUES ('26', '6');
+INSERT INTO `video_category` VALUES ('27', '5');
+INSERT INTO `video_category` VALUES ('27', '6');
+INSERT INTO `video_category` VALUES ('27', '7');
+INSERT INTO `video_category` VALUES ('28', '6');
+INSERT INTO `video_category` VALUES ('28', '8');
+INSERT INTO `video_category` VALUES ('28', '8');
 
 -- ----------------------------
 -- Table structure for `video_detail`
@@ -363,12 +378,13 @@ CREATE TABLE `video_detail` (
   `upload_date` datetime DEFAULT NULL,
   `pid` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of video_detail
 -- ----------------------------
-INSERT INTO `video_detail` VALUES ('19', '第一级', '1', '123-01.MP4', '2020-10-21 20:53:39', '26');
+INSERT INTO `video_detail` VALUES ('19', '第一级', '1', '123-01.mp4', '2021-09-08 00:00:00', '26');
 INSERT INTO `video_detail` VALUES ('20', '出发', '1', '青凌团建-01.MP4', '2020-10-22 09:55:54', '38');
 INSERT INTO `video_detail` VALUES ('21', '合照', '2', '青凌团建-02.MP4', '2020-10-22 09:56:22', '38');
 INSERT INTO `video_detail` VALUES ('22', '比赛', '3', '青凌团建-03.MP4', '2020-10-22 09:56:51', '38');
+INSERT INTO `video_detail` VALUES ('24', '1', '1', '12345-01.mp4', '2021-09-08 00:00:00', '46');

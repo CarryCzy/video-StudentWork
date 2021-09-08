@@ -125,7 +125,7 @@
 
                     <label for="">所属频道：</label>
                     <select name="" id="">
-                        <option value="0">无</option>
+                        <option value="">--请选择--</option>
                         <c:forEach var="obj" items="${type}">
                             <option value="${obj.id}">${obj.categoryName}</option>
                         </c:forEach>
@@ -167,7 +167,7 @@
             ,toolbar: 'true'
             ,cols: [[
                 {type:'checkbox', width:60, title: '全选'}
-                ,{type:'id', width:60, title: '序号'}
+                ,{type:'numbers', width:60, title: '序号'}
                 ,{field:'categoryName', title: '分类名'}
                 ,{field:'pid',  title: '所属频道'
                     ,templet:function (d) {
@@ -177,7 +177,7 @@
                             return '<div>无</div>'
                         }
                         if (d.pid == categories[i].id) {
-                            return '<div>'+ categories[i].category_name +'</div>';
+                            return '<div>'+ categories[i].categoryName +'</div>';
                         }
                     }
                 }}
@@ -206,7 +206,7 @@
             var data = obj.data; //获得当前行数据
             var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
             if (layEvent == 'delete'){
-                layer.confirm('确认删除分类 \"'+ data.category_name + '\" ?', {title:'提示'}, function(index){
+                layer.confirm('确认删除分类 \"'+ data.categoryName + '\" ?', {title:'提示'}, function(index){
                     $.get('manager/category/delCategory?id='+data.id,function (data) {
                         if (data.result >= 1){
                             layer.msg("删除成功");

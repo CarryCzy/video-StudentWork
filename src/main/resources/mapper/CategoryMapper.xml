@@ -43,23 +43,7 @@
     </trim>
   </insert>
   <insert id="insCategory">
-    insert into category
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="categoryName != null">
-        category_name,
-      </if>
-      <if test="pid != null">
-        pid,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="categoryName != null">
-        #{categoryName,jdbcType=VARCHAR},
-      </if>
-      <if test="pid != null">
-        #{pid,jdbcType=INTEGER},
-      </if>
-    </trim>
+    insert into video_category(video_id,category_id) values (#{param1},#{param2})
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.example.pojo.Category">
     update category
@@ -107,10 +91,10 @@
       <if test="param1.id!=null and param1.id!=0">
         id like concat('%',#{param1.id},'%')
       </if>
-      <if test="param1.category_name!=null and param1.category_name!=''">
-        and category_name like concat('%',#{param1.category_name},'%')
+      <if test="param1.categoryName!=null and param1.categoryName!=''">
+        and category_name like concat('%',#{param1.categoryName},'%')
       </if>
-      <if test="param1.pid!=null and param1.pid!=0">
+      <if test="param1.pid!=null">
         and pid like concat('%',#{param1.pid},'%')
       </if>
     </where>
@@ -122,8 +106,8 @@
       <if test="id!=null and id !=0">
         id like concat('%',#{id},'%')
       </if>
-      <if test="category_name!=null and category_name!= ''">
-        and phone like concat('%',#{phone},'%')
+      <if test="categoryName!=null and categoryName!= ''">
+        and category_name like concat('%',#{categoryName},'%')
       </if>
       <if test="pid!=null and pid!= ''">
         and pid like concat('%',#{pid},'%')

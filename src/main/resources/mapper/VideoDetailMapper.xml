@@ -13,11 +13,10 @@
         video_detail.id as id, video_detail.title as title, video_detail.episode as episode,
         video_detail.fileName as fileName, video_detail.uploadDate as uploadDate, video_detail.pid as pid
      </sql>
-    <select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List" />
+    <select id="getById" parameterType="java.lang.Integer" resultType="com.example.pojo.VideoDetail">
+        select *
         from video_detail
-        where id = #{id,jdbcType=INTEGER}
+        where id = #{param1,jdbcType=INTEGER}
     </select>
     <!--根据视频id获取分集信息 c-->
     <select id="getByVideoId" parameterType="java.lang.Integer" resultType="com.example.pojo.VideoDetail">
@@ -31,9 +30,9 @@
         delete from video_detail
         where id = #{id,jdbcType=INTEGER}
     </delete>
-    <insert id="insVideoDetail" keyColumn="id" keyProperty="id" parameterType="com.example.pojo.Actor" >
+    <insert id="insVideoDetail">
     insert into video_detail (pid,title,episode)
-    values (#{pid}, #{title}, #{episode}
+    values (#{param1}, #{param2}, #{param3})
     </insert>
     <update id="updByDetail" parameterType="com.example.pojo.VideoDetail">
         update video_detail
@@ -44,11 +43,11 @@
             <if test="episode != null and episode!=0">
                 episode = #{episode},
             </if>
-            <if test="file_name != null">
-                file_name = #{file_name,jdbcType=VARCHAR},
+            <if test="fileName != null">
+                file_name = #{fileName,jdbcType=VARCHAR},
             </if>
-            <if test="upload_date != null">
-                upload_date = #{upload_date,jdbcType=DATE},
+            <if test="uploadDate != null">
+                upload_date = #{uploadDate,jdbcType=DATE},
             </if>
             <if test="pid!= null and pid!=0">
                 pid = #{pid,jdbcType=INTEGER},
