@@ -78,10 +78,8 @@
     <include refid="Base_Column_List"></include>
     from category limit #{param1},#{param2}
   </select>
-  <select id="selectAll" resultMap="BaseResultMap">
-    select
-    <include refid="Base_Column_List"></include>
-    from category
+  <select id="selectAll" resultType="com.example.pojo.Category">
+    select * from category
   </select>
   <select id="getByName" resultMap="BaseResultMap">
     select

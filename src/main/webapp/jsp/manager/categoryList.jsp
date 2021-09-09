@@ -163,24 +163,24 @@
 
         table.render({
             elem: '#test'
-            ,url:'manager/category/getCategories'
+            ,url:'manager/category/getAll'
             ,toolbar: 'true'
             ,cols: [[
                 {type:'checkbox', width:60, title: '全选'}
-                ,{type:'numbers', width:60, title: '序号'}
+                ,{field:'id', width:60, title: '序号'}
                 ,{field:'categoryName', title: '分类名'}
                 ,{field:'pid',  title: '所属频道'
                     ,templet:function (d) {
-                    var categories = '${categories}';
-                    for(var i in categories){
-                        if (d.pid == '0') {
-                            return '<div>无</div>'
+                        var categories = ${categories};
+                        for(var i in categories){
+                            if (d.pid == '0') {
+                                return '<div>无</div>'
+                            }
+                            if (d.pid == categories[i].id) {
+                                return '<div>'+ categories[i].categoryName +'</div>';
+                            }
                         }
-                        if (d.pid == categories[i].id) {
-                            return '<div>'+ categories[i].categoryName +'</div>';
-                        }
-                    }
-                }}
+                    }}
                 ,{field:'operate',title:'操作'
                     ,templet:function (d) {
                         return '<div><a class="operateBtn" lay-event="delete">删除</a></div>';
@@ -196,7 +196,7 @@
         $(".searchBtn").click(function () {
             table.reload('test',{
                 url:'manager/category/getByName'
-                ,where:{name:$("input:eq(0)").val(),pid:$("select").val()}
+                ,where:{categoryName:$("input:eq(0)").val(),pid:$("select").val()}
                 ,method:'post'
             });
             return false;

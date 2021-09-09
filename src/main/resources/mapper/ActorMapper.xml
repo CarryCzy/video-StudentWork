@@ -101,10 +101,10 @@
     <include refid="Base_Column_List" />
     from actor
     <where>
-      <if test="id!=null || id != 0">
+      <if test="id!=null and id != 0">
         id like concat('%',#{id},'%')
       </if>
-      <if test="name!=null || name != ''">
+      <if test="name!=null and name != ''">
         and `name` like concat('%',#{name},'%')
       </if>
     </where>

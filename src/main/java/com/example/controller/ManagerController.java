@@ -523,7 +523,7 @@ public class ManagerController {
      * @param limit
      * @return
      */
-    @RequestMapping(value="/category/getCategories")
+    @RequestMapping(value="/category/getAll")
     @ResponseBody
     public Map<String,Object> getAllCategory(Integer page,Integer limit) throws IOException {
         int start = (page-1)*limit;
@@ -531,6 +531,7 @@ public class ManagerController {
         result.put("code", 0);
         result.put("count", categoryServiceImpl.getCount());
         result.put("data", categories);
+        result.put("categories",categoryServiceImpl.selectAll());
         return result;
     }
 
@@ -588,6 +589,8 @@ public class ManagerController {
     @RequestMapping("category/list")
     public String categoryList(HttpServletRequest request){
         List<Category> type = categoryServiceImpl.selByPid(0);
+        List<Category> categories = categoryServiceImpl.selectAll();
+        request.setAttribute("categories",categories);
         request.setAttribute("type",type);
         return "manager/categoryList";
     }

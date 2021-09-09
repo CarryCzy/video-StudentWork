@@ -161,7 +161,7 @@
             ,toolbar: 'true'
             ,cols: [[
                 {type:'checkbox', width:60, title: '全选'}
-                ,{type:'numbers', width:60, title: '序号'}
+                ,{field:'id', width:60, title: '序号'}
                 ,{field:'name', title: '地区名'}
                 ,{field:'operate',title:'操作'
                     ,templet:function (d) {

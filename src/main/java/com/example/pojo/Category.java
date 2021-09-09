@@ -48,10 +48,10 @@ public class Category {
 
     @Override
     public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", categoryName='" + categoryName + '\'' +
-                ", pid=" + pid +
+        return "{" +
+                "id:" + id +
+                ", categoryName:'" + categoryName + '\'' +
+                ", pid:" + pid +
                 '}';
     }
 }
