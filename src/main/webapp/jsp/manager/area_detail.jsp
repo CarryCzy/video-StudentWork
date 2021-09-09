@@ -54,13 +54,13 @@
                 <li class="layui-nav-item ">
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">用户列表</a></dd>
+                        <dd><a href="manager/user/list">用户列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
                     <a href="javascript:;">视频管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">视频列表</a></dd>
+                        <dd><a href="manager/video/list">视频列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">

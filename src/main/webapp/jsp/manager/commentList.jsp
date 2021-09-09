@@ -60,10 +60,10 @@
                 <li class="layui-nav-item">
                     <a href="jsp/manager/index.jsp">首页</a>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed" onclick="">
+                <li class="layui-nav-item" onclick="">
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">用户列表</a></dd>
+                        <dd><a href="manager/user/list">用户列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -100,7 +100,7 @@
                         <dd><a href="manager/carousel/add">上传轮播图</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
+                <li class="layui-nav-item  layui-nav-itemed">
                     <a href="javascript:;">评论管理</a>
                     <dl class="layui-nav-child">
                         <dd  class="layui-this"><a href="manager/comment/list">评论列表</a></dd>

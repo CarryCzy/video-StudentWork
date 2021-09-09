@@ -62,10 +62,10 @@
                 <li class="layui-nav-item">
                     <a href="jsp/manager/index.jsp">首页</a>
                 </li>
-                <li class="layui-nav-item layui-nav-itemed" onclick="">
+                <li class="layui-nav-item">
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">用户列表</a></dd>
+                        <dd><a href="manager/user/list">用户列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -95,7 +95,7 @@
                         <dd><a href="manager/area/add">添加地区</a></dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item">
+                <li class="layui-nav-item  layui-nav-itemed">
                     <a href="javascript:;">轮播图管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="manager/carousel/list">轮播图列表</a></dd>

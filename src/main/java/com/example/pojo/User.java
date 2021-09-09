@@ -1,9 +1,10 @@
 package com.example.pojo;
 
-import java.util.Date;
-
+import com.alibaba.fastjson.annotation.JSONField;
 import lombok.*;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import java.sql.Date;
 
 /**
  * user 用户实体层
@@ -26,7 +27,7 @@ public class User {
 
     private Integer age;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @JSONField(format = "yyyy-MM-dd")
     private Date birthday;
 
     private String sex;

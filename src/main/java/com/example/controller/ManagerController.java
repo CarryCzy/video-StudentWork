@@ -134,20 +134,21 @@ public class ManagerController {
      * @param limit
      * @return
      */
-    @RequestMapping("getAll")
+    @RequestMapping(value = "getAll",produces = "text/html;charset=utf-8")
     @ResponseBody
-    public Map<String, Object> getAll(Integer page,Integer limit){
+    public String getAll(Integer page,Integer limit){
         int start = (page-1)*limit;
         List<User> list = userServiceImpl.getAll(start,limit);
         int count = userServiceImpl.getCount();
+        JSONObject jsonObject = new JSONObject();
         if (list.size() > 0){
-            result.put("code",0);
-            result.put("data",list);
-            result.put("count",count);
+            jsonObject.put("code",0);
+            jsonObject.put("data",list);
+            jsonObject.put("count",count);
         }else {
-            result.put("code",1);
+            jsonObject.put("code",1);
         }
-        return result;
+        return jsonObject.toString();
     }
 
     /**
@@ -159,7 +160,6 @@ public class ManagerController {
     @RequestMapping("user/detail/{id}")
     public String userDetail(@PathVariable("id")Integer id,HttpServletRequest request){
         User user = userServiceImpl.selectById(id);
-        System.out.println(user);
         request.setAttribute("user",user);
         return "manager/user_detail";
     }
@@ -182,20 +182,21 @@ public class ManagerController {
      * @param limit
      * @return
      */
-    @RequestMapping("getByCondition")
+    @RequestMapping(value = "getByCondition",produces = "text/html;charset=utf-8")
     @ResponseBody
-    public Map<String, Object> getByCondition(User user,Integer page,Integer limit){
+    public String getByCondition(User user,Integer page,Integer limit){
         Integer start = (page-1)*limit;
         List<User> list = userServiceImpl.getByCondition(user,start,limit);
         Integer count = userServiceImpl.getCountByCondition(user);
+        JSONObject jsonObject = new JSONObject();
         if (list.size() > 0){
-            result.put("code",0);
-            result.put("data",list);
-            result.put("count",count);
+            jsonObject.put("code",0);
+            jsonObject.put("data",list);
+            jsonObject.put("count",count);
         }else {
-            result.put("code",1);
+            jsonObject.put("code",1);
         }
-        return result;
+        return jsonObject.toString();
     }
     @RequestMapping("video/list")
     public String video(HttpServletRequest request){
