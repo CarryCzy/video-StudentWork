@@ -63,7 +63,7 @@
                 <li class="layui-nav-item layui-nav-itemed" onclick="">
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
-                        <dd class="layui-this"><a href="javascript:;">用户列表</a></dd>
+                        <dd class="layui-this"><a href="manager/user/list">用户列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
