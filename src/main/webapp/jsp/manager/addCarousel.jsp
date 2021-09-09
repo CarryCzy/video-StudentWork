@@ -6,7 +6,7 @@
 %>
 <html>
 <head>
-    <title>后台管理</title>
+    <title>添加轮播图</title>
     <base href="<%=basePath%>">
     <link rel="stylesheet" href="static/plugins/layui/css/layui.css"  media="all">
     <link rel="stylesheet" href="static/css/movieglobal.css">
@@ -65,7 +65,7 @@
                 <li class="layui-nav-item layui-nav-itemed" onclick="">
                     <a class="" href="javascript:;">用户管理</a>
                     <dl class="layui-nav-child">
-                        <dd class="layui-this"><a href="javascript:;">用户列表</a></dd>
+                        <dd><a href="javascript:;">用户列表</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">
@@ -99,7 +99,7 @@
                     <a href="javascript:;">轮播图管理</a>
                     <dl class="layui-nav-child">
                         <dd><a href="manager/carousel/list">轮播图列表</a></dd>
-                        <dd><a href="manager/carousel/add">上传轮播图</a></dd>
+                        <dd  class="layui-this"><a href="manager/carousel/add">上传轮播图</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item">

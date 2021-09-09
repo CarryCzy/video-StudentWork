@@ -6,7 +6,7 @@
 %>
 <html>
 <head>
-    <title>后台管理</title>
+    <title>评论列表</title>
     <base href="<%=basePath%>">
     <link rel="stylesheet" href="static/plugins/layui/css/layui.css"  media="all">
     <script src="static/plugins/layui/layui.js"></script>
@@ -103,7 +103,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">评论管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="manager/comment/list">评论列表</a></dd>
+                        <dd  class="layui-this"><a href="manager/comment/list">评论列表</a></dd>
                     </dl>
                 </li>
             </ul>

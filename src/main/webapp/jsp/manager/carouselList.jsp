@@ -6,7 +6,7 @@
 %>
 <html>
 <head>
-    <title>后台管理</title>
+    <title>轮播图列表</title>
     <base href="<%=basePath%>">
     <link rel="stylesheet" href="static/plugins/layui/css/layui.css"  media="all">
     <script src="static/plugins/layui/layui.js"></script>
@@ -96,7 +96,7 @@
                 <li class="layui-nav-item">
                     <a href="javascript:;">轮播图管理</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="manager/carousel/list">轮播图列表</a></dd>
+                        <dd  class="layui-this"><a href="manager/carousel/list">轮播图列表</a></dd>
                         <dd><a href="manager/carousel/add">上传轮播图</a></dd>
                     </dl>
                 </li>
