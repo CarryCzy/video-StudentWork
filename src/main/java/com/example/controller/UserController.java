@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import com.example.pojo.History;
 import com.example.pojo.User;
 import com.example.service.HistoryService;
 import com.example.service.UserService;
@@ -218,5 +219,14 @@ public class UserController {
         String newName = oldName.substring(oldName.indexOf('.'));
         newName = r.nextInt(99999999) + d.getTime() + newName;
         return newName;
+    }
+
+    /**
+     * 添加到历史记录
+     * @param history
+     */
+    @RequestMapping("/addHistory")
+    public void addHistory(History history){
+        historyService.addToHistory(history);
     }
 }

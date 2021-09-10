@@ -21,4 +21,9 @@ public class HistoryServiceImp implements HistoryService {
     public List<History> selectByUid(Integer uid) {
         return historyMapper.selectByUid(uid);
     }
+
+    @Override
+    public int addToHistory(History history) {
+        return historyMapper.insertSelective(history);
+    }
 }

@@ -22,6 +22,7 @@
     from user
     where username = #{username,jdbcType=VARCHAR}
     and password = #{password,jdbcType=VARCHAR}
+    limit 1
   </select>
 
   <!-- 注册 -->
@@ -120,6 +121,7 @@
     <include refid="Base_Column_List" />
     from user
     where username = #{username,jdbcType=VARCHAR}
+    limit 1
   </select>
   <!-- 用户管理功能-qym-分页查询所有用户数据 -->
     <select id="getAll" parameterType="integer" resultType="com.example.pojo.User">
