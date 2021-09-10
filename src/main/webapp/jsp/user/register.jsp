@@ -162,7 +162,7 @@
         var elem = codeInp;
         var error = $(".register-input-error:eq(2)");
         if(elem.val() == "" || elem.val()==null){
-            error.css("color","red").html("请输入验证码！");
+            error.css("color","red").html("请输入验证码(9527)");
             return false;
         }else if (elem.val() == "9527"){
             error.css("color","green").html("✔");

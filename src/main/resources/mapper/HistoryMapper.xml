@@ -21,6 +21,7 @@
     <include refid="Base_Column_List" />
     from history
     where uid = #{uid,jdbcType=INTEGER}
+    group by vid
   </select>
 
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
