@@ -202,8 +202,10 @@ public class ManagerController {
     public String video(HttpServletRequest request){
         List<Video> videos = videoServiceImpl.getAllVideos();
         List<Category> type = categoryServiceImpl.selByPid(0);
+        List<Actor> actors = actorServiceImpl.selectAll();
         request.setAttribute("videos",videos);
         request.setAttribute("type",type);
+        request.setAttribute("actors",actors);
             return "manager/videolist";
     }
 
@@ -225,7 +227,7 @@ public class ManagerController {
     public Map<String,Object> add(HttpServletRequest request, MultipartFile file
             , String name, @RequestParam(value = "type",required = false) Integer type2
             , @RequestParam(value = "category",required = false) List<Integer> category
-            , String starring, Integer year, String location,Integer statue
+            , @RequestParam(value = "starring",required = false) String starring, Integer year, String location,Integer statue
             ,String description,Integer totalEpisode,Integer currentEpisode){
 
         String filename = file.getOriginalFilename();   //获取文件名

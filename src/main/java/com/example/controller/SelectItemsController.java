@@ -1,9 +1,11 @@
 package com.example.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.example.pojo.Actor;
 import com.example.pojo.Area;
 import com.example.pojo.Category;
 import com.example.pojo.Video;
+import com.example.service.ActorService;
 import com.example.service.AreaService;
 import com.example.service.CategoryService;
 import com.example.service.VideoService;
@@ -31,6 +33,9 @@ public class SelectItemsController {
 
     @Resource
     private VideoService videoService;
+
+    @Resource
+    private ActorService actorService;
 
     /**
      * 动态获取所有频道
@@ -70,7 +75,18 @@ public class SelectItemsController {
         String jsonString = JSONArray.toJSONString(list);
         response.getWriter().println(jsonString);
     }
-
+    /**
+     * 获取全部演员
+     * @param response
+     * @throws IOException
+     */
+    @RequestMapping("/getActor")
+    public void getAcotr(HttpServletResponse response) throws IOException {
+        response.setCharacterEncoding("utf-8");
+        List<Actor> list =actorService.selectAll();
+        String jsonString = JSONArray.toJSONString(list);
+        response.getWriter().println(jsonString);
+    }
     /**
      * 获取现有年代
      * @throws IOException

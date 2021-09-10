@@ -298,8 +298,28 @@
         </div>
         <div class="layui-form-item">
             <label class="layui-form-label">演员：</label>
-            <div class="layui-input-block">
-                <input type="starring" lay-verify="required" id="starring2" name="starring" lay-verify="starring" autocomplete="off" placeholder="请输入演员（多个演员以空格分隔）" class="layui-input">
+            <div class="layui-input-block" style="width: 150px;margin-top: 5px;">
+                <select id="starring_01" name="starring" lay-filter="starring">
+                    <option value="">--主演1--</option>
+                    <script>
+                        var starring1Html = " <option value=\"\">--主演1--</option> ";
+                        var starring2Html = " <option value=\"\">--主演2--</option> ";
+                        var uri = "selectItems/getActor";
+                        $.get(uri, function (data) {
+                            var jsonOBJ = eval("("+data+")");
+                            for (var i = 0; i < jsonOBJ.length; i++) {
+                                starring1Html += " <option value="+ jsonOBJ[i].name +" >" + jsonOBJ[i].name + "</option> ";
+                                starring2Html += " <option value="+ jsonOBJ[i].name +" >" + jsonOBJ[i].name + "</option> ";
+                            }
+                            $("#starring_01").html(starring1Html);
+                            $("#starring_02").html(starring2Html);
+                        });
+                    </script>
+                </select>
+                <select id="starring_02" name="starring" lay-filter="starring" >
+                    <option value="">--主演2--</option>
+                </select>
+                <input type="starring" lay-verify="required" id="starring2" name="starring" lay-verify="starring" autocomplete="off" placeholder="或直接输入演员（多个演员以空格分隔）" class="layui-input">
             </div>
         </div>
         <div class="layui-form-item">
@@ -554,7 +574,7 @@ layui.use(['element','table','layer','jquery','form','laydate','upload'], functi
                 layer.open({
                     type:1
                     ,title:'添加视频'
-                    ,area:['700px','720px']
+                    ,area:['800px','820px']
                     ,content:$("#addForm")
                     ,success:function () {
                         var layerForm = layui.form.render('select');
@@ -799,7 +819,7 @@ layui.use(['element','table','layer','jquery','form','laydate','upload'], functi
                 return [$("#category2").val(),$("#category3").val(),$("#category4").val()];
             }
             ,starring:function () {
-                return $("#starring2").val();
+                return [$("#starring2").val(),$("#starring_01").val(),$("#starring_02").val()];
             }
             ,year:function () {
                 return $("#year2").val();

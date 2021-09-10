@@ -62,4 +62,9 @@ public class ActorServiceImpl implements ActorService {
     public int del(Integer id) {
         return actorMapper.del(id);
     }
+
+    @Override
+    public List<Actor> selectAll() {
+        return actorMapper.selectAll();
+    }
 }

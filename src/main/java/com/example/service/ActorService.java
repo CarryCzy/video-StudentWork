@@ -24,6 +24,6 @@ public interface ActorService {
     //统计演员数量
     public int getCount();
     public int del(Integer id);
-
+    public List<Actor> selectAll();
 
 }
