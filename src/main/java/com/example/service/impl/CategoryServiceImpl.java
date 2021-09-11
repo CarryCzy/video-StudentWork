@@ -13,8 +13,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryMapper categoryMapper;
     @Override
-    public int delCategory(Integer id) {
-        return categoryMapper.delCategory(id);
+    public int delCategory(Integer vid) {
+        return categoryMapper.delCategory(vid);
     }
 
     @Override

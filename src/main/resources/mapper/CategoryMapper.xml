@@ -16,8 +16,8 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="delCategory" parameterType="java.lang.Integer">
-    delete from category
-    where id = #{id,jdbcType=INTEGER}
+    delete from video_category
+    where video_id = #{vid}
   </delete>
  <!-- <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.example.pojo.Category" useGeneratedKeys="true">
     insert into category (category_name, pid)

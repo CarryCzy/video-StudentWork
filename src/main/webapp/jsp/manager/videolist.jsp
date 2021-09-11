@@ -574,7 +574,7 @@ layui.use(['element','table','layer','jquery','form','laydate','upload'], functi
                 layer.open({
                     type:1
                     ,title:'添加视频'
-                    ,area:['800px','820px']
+                    ,area:['720px','740px']
                     ,content:$("#addForm")
                     ,success:function () {
                         var layerForm = layui.form.render('select');

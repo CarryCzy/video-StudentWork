@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CategoryService {
     //删除分类
-    int delCategory(Integer id);
+    int delCategory(Integer vid);
     //根据Id查找分类
     Category selectByPrimaryKey(Integer id);
     //修改分类

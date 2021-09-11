@@ -5,8 +5,8 @@ import com.example.pojo.Category;
 import java.util.List;
 
 public interface CategoryMapper {
-    //删除分类
-    int delCategory(Integer id);
+    //删除视频分类关联
+    int delCategory(Integer vid);
     //根据Id查找分类
     Category selectByPrimaryKey(Integer id);
     //修改分类

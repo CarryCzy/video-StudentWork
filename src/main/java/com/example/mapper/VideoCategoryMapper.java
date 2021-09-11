@@ -7,4 +7,5 @@ public interface VideoCategoryMapper {
     int insertSelective(VideoCategory record);
 
     public int delVideoCategory(Integer id);
+
 }
